@@ -130,8 +130,33 @@ max-width:650px;
         rgba(0,0,0,.35)
     );
 }
+/**Add a Glow Behind the Image**/
+    
+.hero-image{
+    position:relative;
+    overflow:hidden;
+    border-radius:30px;
+}
 
+.hero-image::before{
+    content:"";
+    position:absolute;
+    width:420px;
+    height:420px;
+    background:#D4AF37;
+    filter:blur(120px);
+    opacity:.18;
 
+    top:-120px;
+    right:-120px;
+
+    z-index:0;
+}
+
+.hero-image img{
+    position:relative;
+    z-index:2;
+}
 
   
 .btn{
