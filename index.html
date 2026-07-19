@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Empowered Teachers Forum</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Montserrat',sans-serif;
+background:#052f23;
+color:#fff;
+line-height:1.7;
+}
+
+.container{
+width:90%;
+max-width:1200px;
+margin:auto;
+padding:80px 0;
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 0;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:15px;
+font-weight:800;
+font-size:20px;
+letter-spacing:2px;
+color:#d4af37;
+}
+
+.logo img{
+width:70px;
+height:70px;
+object-fit:cover;
+border-radius:50%;
+}
+
+nav ul{
+display:flex;
+list-style:none;
+gap:35px;
+}
+
+nav a{
+text-decoration:none;
+color:#fff;
+font-weight:600;
+transition:.3s;
+}
+
+nav a:hover{
+color:#d4af37;
+}
+
+.hero{
+display:grid;
+grid-template-columns:1fr 1fr;
+align-items:center;
+gap:60px;
+min-height:80vh;
+}
+
+.hero h1{
+font-size:72px;
+font-weight:900;
+line-height:1;
+margin-bottom:30px;
+}
+
+.hero h1 span{
+color:#d4af37;
+}
+
+.hero h2{
+font-size:24px;
+font-weight:400;
+color:#f1f1f1;
+margin-bottom:40px;
+max-width:650px;
+}
+
+.btn{
+display:inline-block;
+background:#fff;
+color:#052f23;
+padding:18px 40px;
+border-radius:8px;
+font-weight:700;
+text-decoration:none;
+transition:.3s;
+}
+
+.btn:hover{
+background:#d4af37;
+color:#052f23;
+}
+
+.hero img{
+width:100%;
+border-radius:20px;
+box-shadow:0 20px 60px rgba(0,0,0,.4);
+}
+
+.testimonials{
+background:#0b3d2f;
+}
+
+.section-title{
+text-align:center;
+font-size:42px;
+margin-bottom:50px;
+font-weight:800;
+color:#d4af37;
+}
+
+.cards{
+display:flex;
+gap:30px;
+}
+
+.card{
+background:#fff;
+color:#333;
+padding:35px;
+border-radius:15px;
+flex:1;
+box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
+
+.card p{
+margin-bottom:20px;
+font-style:italic;
+}
+
+.card h4{
+color:#052f23;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+margin-bottom:70px;
+text-align:center;
+}
+
+.stat{
+background:#0b3d2f;
+padding:35px;
+border-radius:15px;
+}
+
+.stat h2{
+font-size:48px;
+color:#d4af37;
+}
+
+.community-text{
+text-align:center;
+margin-bottom:40px;
+}
+
+.community-text h2{
+font-size:46px;
+margin-bottom:15px;
+}
+
+.community-text p{
+font-size:22px;
+}
+
+form{
+max-width:650px;
+margin:auto;
+display:flex;
+flex-direction:column;
+gap:20px;
+}
+
+input{
+padding:18px;
+font-size:18px;
+border:none;
+border-radius:8px;
+}
+
+button{
+padding:18px;
+background:#d4af37;
+color:#052f23;
+font-weight:800;
+font-size:18px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+footer{
+background:#021a13;
+text-align:center;
+}
+
+.social{
+margin:30px 0;
+}
+
+.social a{
+display:inline-flex;
+justify-content:center;
+align-items:center;
+width:50px;
+height:50px;
+background:#d4af37;
+color:#052f23;
+border-radius:50%;
+margin:0 10px;
+font-size:22px;
+text-decoration:none;
+}
+
+footer p{
+color:#fff;
+}
+
+@media(max-width:900px){
+
+.hero{
+grid-template-columns:1fr;
+text-align:center;
+}
+
+.hero h1{
+font-size:54px;
+}
+
+.cards{
+flex-direction:column;
+}
+
+.stats{
+grid-template-columns:1fr;
+}
+
+nav{
+flex-direction:column;
+gap:20px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="container">
+
+<nav>
+
+<div class="logo">
+<img src="images/logo.png" width="500" height="500" alt="Empowered Teachers Forum Logo">
+<span>EMPOWERED TEACHERS FORUM</span>
+</div>
+
+<ul>
+<li><a href="#">Home</a></li>
+<li><a href="#community">Join Us</a></li>
+<li><a href="#footer">Contact</a></li>
+</ul>
+
+</nav>
+
+<section class="hero container">
+
+<div>
+
+<h1>
+Empowering Educators to Grow Their
+<span>Skills, Income & Leadership</span>
+</h1>
+
+<h2>
+Practical programs and opportunities designed to help teachers and school leaders succeed in and beyond the classroom.
+</h2>
+
+<a href="#community" class="btn">Join Us</a>
+
+</div>
+
+<div>
+<img src="images/hero.jpg" alt="Teachers">
+</div>
+
+</section>
+
+</header>
+
+<section class="testimonials">
+
+<div class="container">
+
+<h2 class="section-title">What Teachers Say</h2>
+
+<div class="cards">
+
+<div class="card">
+<p>"Joining Empowered Teachers Forum transformed my confidence and opened doors to international teaching opportunities."</p>
+<h4>— Sarah M.</h4>
+</div>
+
+<div class="card">
+<p>"The mentorship and networking events helped me develop leadership skills I now use every day."</p>
+<h4>— Daniel K.</h4>
+</div>
+
+<div class="card">
+<p>"A supportive community that genuinely invests in teachers' growth and professional success."</p>
+<h4>— Faith N.</h4>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="community">
+
+<div class="container">
+
+<div class="stats">
+
+<div class="stat">
+<h2>6</h2>
+<p>Events Conducted</p>
+</div>
+
+<div class="stat">
+<h2>150+</h2>
+<p>Teachers Impacted</p>
+</div>
+
+<div class="stat">
+<h2>5</h2>
+<p>Strategic Partners</p>
+</div>
+
+</div>
+
+<div class="community-text">
+
+<h2>Ready to Grow With Us?</h2>
+
+<p>
+Take the first step towards increasing your skills and unlocking new opportunities.
+</p>
+
+</div>
+
+<form>
+
+<input type="text" placeholder="Your Name" required>
+
+<input type="email" placeholder="Email Address" required>
+
+<button type="submit">Join the Community</button>
+
+</form>
+
+</div>
+
+</section>
+
+<footer id="footer">
+
+<div class="container">
+
+<div class="social">
+
+<a href="#"><i class="fab fa-facebook-f"></i></a>
+
+<a href="#"><i class="fab fa-instagram"></i></a>
+
+<a href="#"><i class="fab fa-linkedin-in"></i></a>
+
+</div>
+
+<p>&copy; 2026 Empowered Teachers Forum. All Rights Reserved.</p>
+
+</div>
+
+</footer>
+
+</body>
+</html>
