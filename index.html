@@ -77,10 +77,11 @@ color:#d4af37;
 
 .hero{
     display:grid;
-    grid-template-columns:55% 45%;
+    grid-template-columns:48% 52%;
     align-items:center;
     gap:60px;
     min-height:90vh;
+    
 }
 
 .hero h1{
@@ -108,6 +109,23 @@ max-width:650px;
     border-radius:30px;
     overflow:hidden;
     position:relative;
+
+    animation:float 6s ease-in-out infinite;
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-12px);
+}
+
+100%{
+transform:translateY(0);
+}
 }
 
   /**Add a Premium Overlay**/
