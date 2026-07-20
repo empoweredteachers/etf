@@ -362,6 +362,59 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '1065874902632784');
 fbq('track', 'PageView');
+
+   /** Cloudflare link -->**/
+  
+
+document.getElementById("joinForm").addEventListener("submit", async function(e){
+
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+
+    const message = document.getElementById("message");
+
+    try{
+
+        const response = await fetch("https://etf.empowerteachernow.workers.dev",{   
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify({
+                name:name,
+                email:email
+            })
+
+        });
+
+        if(response.ok){
+
+            message.innerHTML = "✅ Welcome to the Empowered Teachers Forum!";
+            message.style.color = "#D4AF37";
+
+            this.reset();
+
+        }else{
+
+            message.innerHTML = "❌ Something went wrong.";
+            message.style.color = "#ff4d4d";
+
+        }
+
+    }catch(error){
+
+        message.innerHTML = "❌ Unable to connect.";
+        message.style.color = "#ff4d4d";
+
+    }
+
+});
+  
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1065874902632784&ev=PageView&noscript=1"
