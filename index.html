@@ -348,6 +348,42 @@ gap:20px;
 }
 
 }
+  .success-card{
+    background:#fff;
+    border-radius:18px;
+    padding:40px 30px;
+    text-align:center;
+    box-shadow:0 20px 50px rgba(0,0,0,.15);
+    animation:fadeIn .5s ease;
+}
+
+.success-card .icon{
+    font-size:60px;
+    margin-bottom:15px;
+}
+
+.success-card h2{
+    color:#053225;
+    margin-bottom:10px;
+    font-size:32px;
+}
+
+.success-card p{
+    color:#555;
+    font-size:18px;
+    line-height:1.6;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
 
 </style>
   <!-- Meta Pixel Code -->
@@ -560,22 +596,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (response.ok) {
 
-                // Meta Pixel Lead event
-                if (typeof fbq !== "undefined") {
-                    fbq("track", "Lead");
-                }
+              
+            /** Meta Pixel Lead event**/
+              
+    if (typeof fbq !== "undefined") {
+        fbq("track", "Lead");
+    }
 
-                message.textContent = 
-                "✅ Welcome to the Empowered Teachers Forum! Check your email for updates, resources, and upcoming opportunities.";
+    // Replace the form with a success card
+              
+    form.innerHTML = `
+        <div class="success-card">
+            <div class="icon">🎉</div>
+            <h2>You're In!</h2>
+            <p>
+                Welcome to the Empowered Teachers Forum!
+                <br><br>
+                Check your inbox for updates, resources, and upcoming opportunities.
+            </p>
+        </div>
+    `;
 
-                message.style.color = "#D4AF37";
+}
+else {
 
-                form.reset();
+    message.textContent = "Something went wrong. Please try again.";
+    message.style.color = "red";
 
-            } else {
-
-                message.textContent = "Something went wrong. Please try again.";
-                message.style.color = "red";
+}
 
             }
 
