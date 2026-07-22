@@ -528,6 +528,7 @@ Take the first step towards increasing your skills and unlocking new opportuniti
 
 </footer>
   <script>
+<script>
 document.addEventListener("DOMContentLoaded", () => {
 
     const form = document.getElementById("joinForm");
@@ -554,27 +555,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (response.ok) {
 
-if (response.ok) {
+                if (typeof fbq !== "undefined") {
+                    fbq("track", "Lead");
+                }
 
-    if (typeof fbq !== "undefined") {
-        fbq('track', 'Lead');
-    }
+                message.innerHTML = "✅ Thank you for joining the Empowered Teachers Forum!";
+                message.style.color = "#D4AF37";
+                form.reset();
 
-    message.innerHTML = "✅ Thank you for joining the Empowered Teachers Forum!";
-    message.style.color = "#D4AF37";
-    form.reset();
-
-}
-             
-
-             else {
+            } else {
 
                 message.innerHTML = "Something went wrong.";
                 message.style.color = "red";
 
             }
 
-        catch (error) {
+        } catch (error) {
+
+            console.error(error);
 
             message.innerHTML = "Unable to connect.";
             message.style.color = "red";
@@ -584,6 +582,7 @@ if (response.ok) {
     });
 
 });
+</script>
 </script>
 
 </body>
