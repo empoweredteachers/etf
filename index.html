@@ -527,15 +527,12 @@ Take the first step towards increasing your skills and unlocking new opportuniti
 </div>
 
 </footer>
-  <script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-
     const form = document.getElementById("joinForm");
     const message = document.getElementById("message");
 
     form.addEventListener("submit", async (e) => {
-
         e.preventDefault();
 
         const data = {
@@ -544,7 +541,6 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         try {
-
             const response = await fetch("https://rapid-hat-720.empowerteachernow.workers.dev/", {
                 method: "POST",
                 headers: {
@@ -554,35 +550,26 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             if (response.ok) {
-
                 if (typeof fbq !== "undefined") {
                     fbq("track", "Lead");
                 }
 
-                message.innerHTML = "✅ Thank you for joining the Empowered Teachers Forum!";
+                message.textContent = "✅ Thank you for joining the Empowered Teachers Forum!";
                 message.style.color = "#D4AF37";
                 form.reset();
-
             } else {
-
-                message.innerHTML = "Something went wrong.";
+                message.textContent = "Something went wrong.";
                 message.style.color = "red";
-
             }
 
-        catch (error) {
-
+        } catch (error) {
             console.error(error);
-
-            message.innerHTML = "Unable to connect.";
+            message.textContent = "Unable to connect.";
             message.style.color = "red";
-
         }
-
     });
-
 });
-</script>
+
 </script>
 
 </body>
