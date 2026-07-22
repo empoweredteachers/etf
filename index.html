@@ -554,11 +554,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (response.ok) {
 
-                message.innerHTML = "✅ Thank you for joining the Empowered Teachers Forum!";
-                message.style.color = "#D4AF37";
-                form.reset();
+if (response.ok) {
 
-            } else {
+    if (typeof fbq !== "undefined") {
+        fbq('track', 'Lead');
+    }
+
+    message.innerHTML = "✅ Thank you for joining the Empowered Teachers Forum!";
+    message.style.color = "#D4AF37";
+    form.reset();
+
+}
+             
+
+             else {
 
                 message.innerHTML = "Something went wrong.";
                 message.style.color = "red";
