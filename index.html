@@ -530,6 +530,7 @@ Join the Community
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("joinForm");
     const message = document.getElementById("message");
+    const submitBtn = form.querySelector("button");
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -539,33 +540,58 @@ document.addEventListener("DOMContentLoaded", () => {
             email: document.getElementById("email").value
         };
 
+        // Loading state starts here
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Joining...";
+        message.textContent = "Sending your details...";
+        message.style.color = "#D4AF37";
+
         try {
-            const response = await fetch("https://rapid-hat-720.empowerteachernow.workers.dev/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            });
+            const response = await fetch(
+                "https://rapid-hat-720.empowerteachernow.workers.dev/",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                }
+            );
 
             if (response.ok) {
+
+                // Meta Pixel Lead event
                 if (typeof fbq !== "undefined") {
                     fbq("track", "Lead");
                 }
 
-                message.textContent = "✅ Welcome to the Empowered Teachers Forum! 
-                                            Check your email for updates, resources, and upcoming opportunities!";
+                message.textContent = 
+                "✅ Welcome to the Empowered Teachers Forum! Check your email for updates, resources, and upcoming opportunities.";
+
                 message.style.color = "#D4AF37";
+
                 form.reset();
+
             } else {
-                message.textContent = "Something went wrong.";
+
+                message.textContent = "Something went wrong. Please try again.";
                 message.style.color = "red";
+
             }
 
         } catch (error) {
+
             console.error(error);
-            message.textContent = "Unable to connect.";
+
+            message.textContent = "Unable to connect. Please check your internet connection.";
             message.style.color = "red";
+
+        } finally {
+
+            // Restore button after completion
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Join Now";
+
         }
     });
 });
