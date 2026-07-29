@@ -395,7 +395,81 @@ footer{
 footer p{
     color:#fff;
 }
+.section-text{
+max-width:700px;
+margin:0 auto 50px;
+text-align:center;
+font-size:1.1rem;
+}
 
+.resources{
+background:#f7f9f8;
+}
+
+.resource-feature{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:60px;
+align-items:center;
+}
+
+.resource-image img{
+width:100%;
+max-width:420px;
+display:block;
+margin:auto;
+}
+
+.free-badge{
+display:inline-block;
+background:#C8A24A;
+padding:8px 18px;
+border-radius:30px;
+font-weight:700;
+margin-bottom:20px;
+}
+
+.resource-content ul{
+list-style:none;
+margin:25px 0;
+}
+
+.resource-content li{
+padding:10px 0;
+}
+
+.products{
+background:white;
+}
+
+.products .card img{
+width:100%;
+border-radius:12px;
+margin-bottom:20px;
+}
+
+.products .card{
+text-align:center;
+}
+
+.products .btn-primary{
+display:inline-block;
+margin-top:20px;
+}
+
+@media(max-width:900px){
+
+.resource-feature{
+grid-template-columns:1fr;
+text-align:center;
+}
+
+.resource-content ul{
+text-align:left;
+display:inline-block;
+}
+
+}
 /* ========================================
    MOBILE
 ======================================== */
