@@ -772,8 +772,9 @@ Practical programs and opportunities designed to help teachers and school leader
             <li>✔ Personal readiness assessment</li>
           </ul>
 
-          <a href="#join" class="btn-primary">
-            Download Free Checklist
+           <a href="#join" class="btn-primary"
+            onclick="setOffer('free-checklist')">
+           Download Free Checklist
           </a>
 
         </div>
@@ -811,10 +812,11 @@ Practical programs and opportunities designed to help teachers and school leader
             <li>✔ Interview readiness score</li>
           </ul>
 
-          <a href="#join" class="btn-primary">
-            Download AI CV Prompt
+          <a href="#join" class="btn-primary"
+          onclick="setOffer('free-ai-cv')">
+           Download AI CV Prompt
           </a>
-
+         
         </div>
 
       </div>
@@ -855,10 +857,12 @@ our practical resources.
         school recruitment.
     </p>
 
-    <a href="#join" class="btn">
-        Learn More
-    </a>
-
+    <a href="#join"
+   class="btn-primary"
+   onclick="setOffer('handbook')">
+   Buy the Handbook
+</a>
+  
 </div>
 <div class="card">
   <div class="product-image">
@@ -873,10 +877,11 @@ Guidance to successful transitions from the Corporate World into Teaching.
 
 </p>
 
-<a href="#join" class="btn-primary">
-Learn More
+<a href="#join"
+   class="btn-primary"
+   onclick="setOffer('corporate')">
+   Get the Guide
 </a>
-
 </div>
 
 <div class="card">
@@ -893,10 +898,11 @@ Prepare confidently for interviews with you next schools.
 
 </p>
 
-<a href="#join" class="btn-primary">
-Learn More
+<a href="#join"
+   class="btn-primary"
+   onclick="setOffer('timeless')">
+   Get the Strategies 
 </a>
-
 </div>
 
 </div>
@@ -1025,6 +1031,9 @@ Learn More
 
 </footer>
 <script>
+  function setOffer(offer) {
+    localStorage.setItem("selectedOffer", offer);
+}
 document.addEventListener("DOMContentLoaded", () => {
 
     const form = document.getElementById("joinForm");
