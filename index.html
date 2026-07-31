@@ -1030,10 +1030,12 @@ Prepare confidently for interviews with you next schools.
 </div>
 
 </footer>
+  
 <script>
-  function setOffer(offer) {
+function setOffer(offer) {
     localStorage.setItem("selectedOffer", offer);
 }
+
 document.addEventListener("DOMContentLoaded", () => {
 
     const form = document.getElementById("joinForm");
@@ -1050,9 +1052,13 @@ document.addEventListener("DOMContentLoaded", () => {
         message.textContent = "Sending your details...";
         message.style.color = "#D4AF37";
 
+        // Get selected offer
+        const offer = localStorage.getItem("selectedOffer") || "community";
+
         const data = {
             name: document.getElementById("name").value,
-            email: document.getElementById("email").value
+            email: document.getElementById("email").value,
+            offer: offer
         };
 
         try {
@@ -1075,10 +1081,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     fbq("track", "Lead");
                 }
 
-                // Hide the old message
+                // Hide old message
                 message.style.display = "none";
 
-                // Replace the form
+                // Show success card
                 form.innerHTML = `
                     <div class="success-card">
                         <div class="icon">🎉</div>
@@ -1089,11 +1095,28 @@ document.addEventListener("DOMContentLoaded", () => {
                             You're now part of the
                             <strong>Empowered Teachers Forum.</strong>
                             <br><br>
-                            📧 Check your inbox for our Welcome email,
-                            Free resources and upcoming opportunities.
+                            Preparing your resource...
                         </p>
                     </div>
                 `;
+
+                // Wait 2 seconds then redirect
+                setTimeout(() => {
+
+                    // Premium products go directly to their pages
+                    if (offer === "handbook") {
+                        window.location.href = "checkout.html";
+                    }
+                    else if (offer === "mentorship") {
+                        window.location.href = "mentorship.html";
+                    }
+
+                    // All free resources use ONE thank-you page
+                    else {
+                        window.location.href = `thankyou.html?offer=${offer}`;
+                    }
+
+                }, 2000);
 
             } else {
 
@@ -1120,7 +1143,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
-
+</script>
 </script>
 
 </body>
