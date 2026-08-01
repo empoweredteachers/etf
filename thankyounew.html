@@ -179,13 +179,12 @@ Your free resource is ready.
 
 <p id="resourceDescription"></p>
 
-<a
-id="downloadButton"
-class="btn"
-href="#"
-target="_blank">
+<a id="downloadButton"
+   class="btn"
+   href="#"
+   download>
 
-Download Resource
+    Download Resource
 
 </a>
 
@@ -249,7 +248,7 @@ description:"Review your CV like an international school recruiter using AI.",
 
 image:"images/aicv.png",
 
-file:"https://drive.google.com/uc?export=download&id=1f8WXAzgnags_vujfvzAwLQ22AV18ZzRM"
+file:"downloads/AI-CV-Review-Prompt.pdf"
 
 },
   
@@ -280,6 +279,13 @@ document.getElementById("resourceDescription").textContent=resource.description;
 document.getElementById("resourceImage").src=resource.image;
 
 document.getElementById("downloadButton").href=resource.file;
+
+  // Start download automatically after 1 second
+setTimeout(() => {
+    if (resource.file !== "#") {
+        window.location.href = resource.file;
+    }
+}, 1000);
 
 if(resource.file==="#"){
 
