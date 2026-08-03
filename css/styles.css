@@ -41,7 +41,7 @@ nav a:hover { color:var(--primary); }
 
 /* HERO IMAGE */
 .hero-image { position:relative; overflow:hidden; border-radius:30px; aspect-ratio:16/10; animation:float 6s ease-in-out infinite;  margin-bottom: 50px; text-align: center;}
-.hero-image img { width:100%; max-width: 550px; height:auto; object-fit:cover; display:block; position:relative; z-index:2;  border-radius: 20px;  margin: auto;}
+.hero-image img { width:100%; max-width: 550px; height:650px; object-fit:cover; display:block; position:relative; z-index:2;  border-radius: 20px;  margin: auto;}
 .hero-image::after { content:""; position:absolute; inset:0; background:linear-gradient(135deg, rgba(0,40,25,.15), rgba(0,0,0,.35)); z-index:3; }
 .hero-image::before { content:""; position:absolute; width:420px; height:420px; background:var(--primary); filter:blur(120px); opacity:.18; top:-120px; right:-120px; z-index:1; }
 @keyframes float { 0%{transform:translateY(0);} 50%{transform:translateY(-12px);} 100%{transform:translateY(0);} }
