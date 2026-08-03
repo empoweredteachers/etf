@@ -104,14 +104,13 @@ img{
 
 
 /* ========================================
-   TEACHER IMAGE SLIDER
+   TEACHER IMAGE SLIDER /* community-highlights  */
 ======================================== */
+.photo-track{    display:flex;   gap:25px;     width:max-content;    animation:scrollGallery 25s linear infinite;}
+.photo-track img {     width: 260px;     height: 180px;     max-width: none;     object-fit: cover;     flex-shrink: 0; }
 
-
-.teacher-gallery{    padding:70px 0;    background:var(--light);    color:var(--text-dark);    overflow:hidden;}
-.gallery-wrapper{    overflow:hidden;    width:100%;}
-.gallery-track{    display:flex;   gap:25px;     width:max-content;    animation:scrollGallery 25s linear infinite;}
-.gallery-track img{    width:200px;    height:140px;    flex:0 0 auto;    object-fit:contain;    border-radius:var(--radius-lg);    box-shadow:var(--shadow);}
+.community-highlights {    overflow: hidden;    padding: 80px 0;}
+.photo-slider {    width: 100%;    overflow: hidden;    position: relative;}
 @keyframes scrollGallery{
 from{transform:translateX(0);}
 to{transform:translateX(-50%);}}
@@ -135,27 +134,15 @@ button:hover { opacity:.9; }
 .success-card h2, .success-card p { color:var(--dark); }
 @keyframes fadeIn { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
 
-/* TEACHER GALLERY */
-.teacher-gallery {padding:70px 0; text-align:center; background:var(--light);}
-.teacher-gallery h2 {color:var(--dark); font-size:36px;}
-.gallery-wrapper { overflow:hidden; width:100%; }
-.gallery-track { display:flex; gap:25px; width:max-content; animation:scrollGallery 25s linear infinite; }
-.gallery-track img { width:200px; height:140px; flex-shrink:0; object-fit:cover; border-radius:var(--radius-lg); box-shadow:var(--shadow); }
-@keyframes scrollGallery { from {transform:translateX(0); }
 
-    to{ transform:translateX(-50%);  }
-}
 /* FOOTER */
 footer { background:var(--footer); text-align:center; }
 .social { margin:30px 0; }
 .social a { display:inline-flex; justify-content:center; align-items:center; width:50px; height:50px; background:var(--primary); color:var(--dark); border-radius:50%; margin:0 10px; font-size:22px; text-decoration:none; }
 footer p { color:var(--text-light); }
 
-/* community-highlights  */
-.community-highlights {    overflow: hidden;    padding: 80px 0;}
-.photo-slider {    width: 100%;    overflow: hidden;    position: relative;}
-.gallery-track  {    display: flex;    width: max-content;    gap: 25px;    animation: none 35s linear infinite;}
-.gallery-track img {    width: 340px;    height: 230px;    object-fit: cover;    border-radius: 15px;    flex-shrink: 0;}
+
+
 
 @keyframes scroll {
     from {        transform: translateX(0);    }
