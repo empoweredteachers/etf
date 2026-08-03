@@ -112,9 +112,7 @@ img{
 .photo-slider::-webkit-scrollbar {    display: none;}
 .featured-image { text-align: center; margin-bottom: 50px; }
 .featured-image img { width: 100%; max-width: 800px; border-radius: 20px; margin: auto; }
-@keyframes scrollGallery{
-from{transform:translateX(0);}
-to{transform:translateX(-50%);}}
+
                  
 /* COMMUNITY */
 .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:30px; margin-bottom:70px; text-align:center; }
