@@ -559,19 +559,36 @@ document.addEventListener("DOMContentLoaded", () => {
   /*Image Scroll*/
   const slider = document.querySelector(".photo-slider");
 
-function autoScroll() {
+let speed = 1;
+let timer;
 
-    slider.scrollLeft += 1;
+function startScrolling() {
 
-    if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth) {
+    timer = setInterval(() => {
 
-        slider.scrollLeft = 0;
+        slider.scrollLeft += speed;
 
-    }
+        if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth) {
+
+            slider.scrollLeft = 0;
+
+        }
+
+    }, 20);
 
 }
 
-setInterval(autoScroll, 20);
+function stopScrolling() {
+
+    clearInterval(timer);
+
+}
+
+slider.addEventListener("mouseenter", stopScrolling);
+
+slider.addEventListener("mouseleave", startScrolling);
+
+startScrolling();
 </script>
 
 </body>
