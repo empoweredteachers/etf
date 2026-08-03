@@ -69,7 +69,7 @@ box-shadow:var(--shadow); } }
 ======================================== */
 
 img{
-    max-width:50%; display:block;}
+    max-width:100%; display:block;}
 
 /* ========================================
    CARD SYSTEM
@@ -89,7 +89,7 @@ img{
 ======================================== */
 .products{ background:var(--light); color:var(--text-dark);}
 .products .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:30px;}
-.products .card img{ width:100%; height:320px; object-fit:contain; margin-bottom:20px; }
+.products .card img{ width:90%; height:320px; object-fit:contain; margin-bottom:20px; }
 
 /* ========================================
    RESOURCES
