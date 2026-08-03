@@ -98,7 +98,9 @@ img{
 .resource-feature{    display:grid;    grid-template-columns:1fr 1fr;    gap:100px;    align-items:center;}
 .resource-image{    height:350px;    display:flex;    justify-content:center;    align-items:center;}
 .resource-image img{    max-height:100%;    width:auto;    object-fit:contain;}
-.resource-item {    margin-bottom: 80px;}
+.resource-item {  display: grid; grid-template-columns: 350px 1fr; gap: 100px; align-items: start; margin-bottom: 80px;
+
+}}
 
 
 /* ========================================
