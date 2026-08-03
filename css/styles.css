@@ -108,10 +108,10 @@ img{
    TEACHER IMAGE SLIDER /* community-highlights  */
 ======================================== */
 .photo-track{    display:flex;   gap:25px;     width:max-content;    animation:scrollGallery 25s linear infinite;}
-.photo-track img {     width: 100px;     height: 100px;     max-width: none;     object-fit: cover;     flex-shrink: 0; }
-
+.photo-track img {     width: 200px;     height: 100px;     max-width: none;     object-fit: cover;     flex-shrink: 0; }
 .community-highlights {    overflow: hidden;    padding: 80px 0;}
 .photo-slider {    width: 100%;    overflow: hidden;    position: relative;}
+
 @keyframes scrollGallery{
 from{transform:translateX(0);}
 to{transform:translateX(-50%);}}
