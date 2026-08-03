@@ -658,6 +658,226 @@ display:inline-block;
     text-align:center;
     margin-bottom:40px;
 }
+   /* HERO SECTION */
+
+.hero {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:50px;
+    padding:80px 8%;
+    background:#ffffff;
+}
+
+
+.hero-content {
+    flex:1;
+}
+
+
+.hero-content h1 {
+    font-size:48px;
+    line-height:1.15;
+    color:#064e3b;
+    margin-bottom:20px;
+}
+
+
+.hero-content p {
+    font-size:20px;
+    color:#555;
+    max-width:520px;
+    line-height:1.6;
+}
+
+
+.hero-buttons {
+    margin-top:30px;
+    display:flex;
+    gap:15px;
+}
+
+
+.btn-primary,
+.btn-secondary {
+
+    padding:14px 28px;
+    border-radius:30px;
+    text-decoration:none;
+    font-weight:600;
+
+}
+
+
+.btn-primary {
+    background:#065f46;
+    color:white;
+}
+
+
+.btn-secondary {
+    border:2px solid #065f46;
+    color:#065f46;
+}
+
+
+.hero-image {
+    flex:1;
+}
+
+
+.hero-image img {
+
+    width:100%;
+    height:500px;
+    object-fit:cover;
+    border-radius:25px;
+
+}
+
+
+
+/* GALLERY SECTION */
+
+
+.teacher-gallery {
+
+    padding:70px 0;
+    text-align:center;
+    background:#f8faf8;
+
+}
+
+
+.teacher-gallery h2 {
+
+    font-size:36px;
+    color:#064e3b;
+
+}
+
+
+.teacher-gallery p {
+
+    color:#555;
+    margin-bottom:40px;
+
+}
+
+
+
+.gallery-wrapper {
+
+    overflow:hidden;
+    width:100%;
+
+}
+
+
+
+.gallery-track {
+
+    display:flex;
+    gap:25px;
+    width:max-content;
+
+    animation:scrollGallery 25s linear infinite;
+
+}
+
+
+.gallery-track img {
+
+    width:280px;
+    height:200px;
+
+    object-fit:cover;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+
+}
+
+
+
+/* AUTO SCROLL */
+
+
+@keyframes scrollGallery {
+
+    from {
+        transform:translateX(0);
+    }
+
+
+    to {
+        transform:translateX(-50%);
+    }
+
+}
+
+
+
+/* MOBILE */
+
+
+@media(max-width:768px){
+
+
+.hero {
+
+    flex-direction:column;
+    padding:50px 20px;
+
+}
+
+
+.hero-content h1 {
+
+    font-size:34px;
+
+}
+
+
+.hero-content p {
+
+    font-size:17px;
+
+}
+
+
+.hero-image img {
+
+    height:350px;
+
+}
+
+
+.hero-buttons {
+
+    flex-direction:column;
+
+}
+
+
+.btn-primary,
+.btn-secondary {
+
+    text-align:center;
+
+}
+
+
+.gallery-track img {
+
+    width:220px;
+    height:160px;
+
+}
+
+
+}
 }
 
 </style>
