@@ -161,7 +161,7 @@ footer p { color:var(--text-light); }
 }
 
 .photo-slider {    width: 100%;    overflow: hidden;    position: relative;}
-.photo-track {    display: flex;    width: max-content;    gap: 25px;    animation: scroll 35s linear infinite;}
+.photo-track {    display: flex;    width: max-content;    gap: 25px;    animation: none 35s linear infinite;}
 .photo-track img {
 
     width: 340px;
