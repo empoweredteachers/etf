@@ -103,7 +103,7 @@ img{
 
 
 /* ========================================
-   TEACHER IMAGE SLIDER /* community-highlights  */
+   TEACHER IMAGE SLIDER (community-highlights)
 ======================================== */
 .photo-track{    display:flex;   gap:25px;     width:max-content;    animation:scrollGallery 25s linear infinite;}
 .photo-track img {     width: 200px;     height: 100px;     max-width: none;     object-fit: cover;     flex-shrink: 0; }
