@@ -375,16 +375,41 @@ button:hover{
 .resource-content{
     display:flex;
     flex-direction:column;
-    height:100%;
     padding:2rem;
 }
 
+.free-badge{
+    display:inline-block;
+    align-self:flex-start;
+    margin-bottom:20px;
+}
+
+.resource-content h3{
+    margin-bottom:15px;
+}
+
+.resource-content p{
+    margin-bottom:20px;
+}
+
 .resource-content ul{
-    margin-bottom:1.5rem;
+    list-style:none;
+    padding:0;
+    margin:0 0 25px;
+}
+
+.resource-content li{
+    padding:8px 0;
 }
 
 .resource-content .btn-primary{
-    margin-top:auto;
+    display:inline-block;
+    align-self:flex-start;
+    margin-top:10px;
+}
+.resources-grid{
+    display:grid;
+    gap:70px;
 }
 /* ========================================
    FOOTER
