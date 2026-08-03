@@ -69,7 +69,9 @@ box-shadow:var(--shadow); }
 ======================================== */
 
 img{
-    max-width:100%; display:block;  height: auto;}
+    max-width:100%; display:block;  }
+
+
 
 /* ========================================
    CARD SYSTEM
