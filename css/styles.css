@@ -372,11 +372,6 @@ button:hover{
     }
 
 }
-.resource-content{
-    display:flex;
-    flex-direction:column;
-    padding:2rem;
-}
 
 .free-badge{
     display:inline-block;
@@ -411,6 +406,7 @@ button:hover{
     display:grid;
     gap:70px;
 }
+
 /* ========================================
    FOOTER
 ======================================== */
@@ -657,10 +653,7 @@ display:inline-block;
     .community-text p{
         font-size:18px;
     }
-.community-section{
-    background:#052f23;
-    padding:80px 0;
-}
+
   .community-text{
     text-align:center;
     margin-bottom:40px;
