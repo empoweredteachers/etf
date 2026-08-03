@@ -58,7 +58,7 @@ a:focus, button:focus, input:focus { outline:3px solid var(--primary); outline-o
 .testimonials { background:var(--dark-alt); }
 .section-title { text-align:center; font-size:42px; margin-bottom:50px; font-weight:800; color:var(--primary); }
 .cards { display:grid; grid-template-columns:repeat(3,1fr);gap:30px; }
-.card { display:flex; p:color:#333; flex-direction:column; justify-content:space-between; transition:var(--transition); background:white; padding:30px; border-radius:var(--radius-lg);
+.card { display:flex; flex-direction:column; justify-content:space-between; transition:var(--transition); background:white; padding:30px; border-radius:var(--radius-lg);
 box-shadow:var(--shadow); }
 .card:hover { transform:translateY(-8px); }
 .card p { margin-bottom:20px; font-style:italic; }
