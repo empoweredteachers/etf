@@ -559,6 +559,9 @@ document.addEventListener("DOMContentLoaded", () => {
   /*Image Scroll*/
   const slider = document.querySelector(".photo-slider");
 
+// Duplicate all images once
+slider.innerHTML += slider.innerHTML;
+
 let speed = 1;
 let timer;
 
@@ -568,7 +571,8 @@ function startScrolling() {
 
         slider.scrollLeft += speed;
 
-        if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth) {
+        // Reset when we've scrolled through the first set
+        if (slider.scrollLeft >= slider.scrollWidth / 2) {
 
             slider.scrollLeft = 0;
 
