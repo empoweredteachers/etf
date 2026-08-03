@@ -788,14 +788,14 @@ display:inline-block;
 
 .gallery-track img {
 
-    width:280px;
-    height:200px;
+    width:200px;
+    height:140px;
 
     object-fit:cover;
 
-    border-radius:20px;
+    border-radius:16px;
 
-    box-shadow:0 10px 25px rgba(0,0,0,.12);
+    box-shadow:0 8px 18px rgba(0,0,0,.10);
 
 }
 
@@ -871,8 +871,8 @@ display:inline-block;
 
 .gallery-track img {
 
-    width:220px;
-    height:160px;
+    width:160px;
+    height:110px;
 
 }
 
