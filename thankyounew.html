@@ -281,17 +281,7 @@ document.getElementById("resourceImage").src=resource.image;
 document.getElementById("downloadButton").href=resource.file;
 
   // Start download automatically after 1 second
-setTimeout(() => {
-    if (resource.file !== "#") {
-        window.location.href = resource.file;
-    }
-}, 1000);
 
-if(resource.file==="#"){
-
-document.getElementById("downloadButton").style.display="none";
-
-}
 
 </script>
 
