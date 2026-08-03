@@ -101,7 +101,7 @@ img{
 .resource-feature{    display:grid;    align-items:center; display: grid; grid-template-columns: 350px 1fr; gap: 100px; align-items: start; margin-bottom: 80px;  border-bottom: 1px solid #ddd;}
 .resource-image{    height:350px;    display:flex;    justify-content:center;    align-items:center;}
 .resource-image img{    max-height:100%;        object-fit:contain; width: 100%;     max-width: 350px;     height: auto;     margin: 0 auto;}
-.resource-item {  display: grid; grid-template-columns: 350px 1fr; gap: 100px; align-items: start; margin-bottom: 80px;  border-bottom: 1px solid #ddd;}
+
 
 
 /* ========================================
