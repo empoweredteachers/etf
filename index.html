@@ -116,7 +116,7 @@ Practical programs and opportunities designed to help teachers and school leader
 
 </div>
 
-            </div>
+    </div>
 
         </div>
 
@@ -566,6 +566,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+  /*Image Scroll*/
+  const slider = document.querySelector(".photo-slider");
+
+function autoScroll() {
+
+    slider.scrollLeft += 1;
+
+    if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth) {
+
+        slider.scrollLeft = 0;
+
+    }
+
+}
+
+setInterval(autoScroll, 20);
 </script>
 </script>
 
