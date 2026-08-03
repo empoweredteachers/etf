@@ -108,7 +108,7 @@ img{
 ======================================== */
 
 
-.teacher-gallery{    padding:70px 0;    background:var(--light);    color:var(--text-dark);    overflow:hidden;
+.teacher-gallery{    padding:70px 0;    background:var(--light);    color:var(--text-dark);    overflow:hidden;}
 .gallery-wrapper{    overflow:hidden;    width:100%;}
 .gallery-track{    display:flex;   gap:25px;     width:max-content;    animation:scrollGallery 25s linear infinite;}
 .gallery-track img{    width:200px;    height:140px;    flex:0 0 auto;    object-fit:contain;    border-radius:var(--radius-lg);    box-shadow:var(--shadow);}
