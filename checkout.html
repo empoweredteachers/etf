@@ -357,7 +357,12 @@ After Payment
 <script>
 
 async function payNow() {
+const email = localStorage.getItem("email");
 
+    if(!email){
+        alert("Please enter your email before making payment.");
+        return;
+    }
     const response = await fetch(
         "https://rapid-hat-720.empowerteachernow.workers.dev/create-payment",
         {
