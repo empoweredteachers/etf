@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Payment Successful | Empowered Teachers Forum</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --green:#052f23;
+    --gold:#d4af37;
+    --gold-hover:#c19c2e;
+    --light:#f7f9f8;
+    --success:#2e7d32;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:'Montserrat',sans-serif;
+    background:var(--light);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:25px;
+
+}
+
+.card{
+
+    width:100%;
+    max-width:760px;
+    background:#fff;
+    border-radius:22px;
+    padding:50px;
+    text-align:center;
+    box-shadow:0 15px 45px rgba(0,0,0,.08);
+
+}
+
+.logo{
+
+    font-size:14px;
+    font-weight:700;
+    color:var(--green);
+    letter-spacing:1px;
+    margin-bottom:20px;
+
+}
+
+.check{
+
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    background:var(--success);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:60px;
+    margin:0 auto 30px;
+    animation:pop .5s ease;
+
+}
+
+@keyframes pop{
+
+0%{
+transform:scale(.4);
+opacity:0;
+}
+
+100%{
+transform:scale(1);
+opacity:1;
+}
+
+}
+
+h1{
+
+    color:var(--green);
+    margin-bottom:15px;
+    font-size:36px;
+
+}
+
+.subtitle{
+
+    color:#666;
+    line-height:1.8;
+    margin-bottom:35px;
+
+}
+
+.product{
+
+    background:#f8f8f8;
+    border-radius:16px;
+    padding:25px;
+    text-align:left;
+    margin-bottom:35px;
+
+}
+
+.product h3{
+
+    color:var(--green);
+    margin-bottom:15px;
+
+}
+
+.product ul{
+
+    padding-left:20px;
+    line-height:2;
+
+}
+
+.reference{
+
+    background:#eef8f1;
+    border-left:5px solid var(--success);
+    padding:18px;
+    border-radius:10px;
+    margin-bottom:35px;
+
+}
+
+.reference strong{
+
+    color:var(--green);
+
+}
+
+.btn{
+
+    display:block;
+    width:100%;
+    text-decoration:none;
+    background:var(--gold);
+    color:white;
+    padding:18px;
+    border-radius:50px;
+    font-weight:700;
+    font-size:18px;
+    margin-bottom:18px;
+    transition:.3s;
+
+}
+
+.btn:hover{
+
+    background:var(--gold-hover);
+
+}
+
+.btn.secondary{
+
+    background:var(--green);
+
+}
+
+.btn.secondary:hover{
+
+    background:#074232;
+
+}
+
+.next{
+
+    margin-top:40px;
+    text-align:left;
+    background:#f8f8f8;
+    padding:25px;
+    border-radius:16px;
+
+}
+
+.next h3{
+
+    color:var(--green);
+    margin-bottom:15px;
+
+}
+
+.next ul{
+
+    padding-left:20px;
+    line-height:2;
+
+}
+
+.footer{
+
+    margin-top:40px;
+    color:#777;
+    font-size:14px;
+
+}
+
+@media(max-width:700px){
+
+.card{
+
+padding:35px 25px;
+
+}
+
+h1{
+
+font-size:28px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="logo">
+
+EMPOWERED TEACHERS FORUM
+
+</div>
+
+<div class="check">
+
+✓
+
+</div>
+
+<h1>
+
+Payment Successful
+
+</h1>
+
+<p class="subtitle">
+
+Thank you for purchasing the
+
+<strong>Global Educator's Job Search Handbook.</strong>
+
+<br><br>
+
+Your payment has been verified successfully.
+
+</p>
+
+<div class="reference">
+
+<strong>Payment Reference</strong>
+
+<br><br>
+
+<span id="reference">
+
+Loading...
+
+</span>
+
+</div>
+
+<div class="product">
+
+<h3>
+
+Your Purchase Includes
+
+</h3>
+
+<ul>
+
+<li>✔ Global Educator's Job Search Handbook (PDF)</li>
+
+<li>✔ Instant Digital Access</li>
+
+<li>✔ Future Handbook Updates</li>
+
+<li>✔ Bonus Career Resources</li>
+
+</ul>
+
+</div>
+
+<a class="btn"
+href="https://rapid-hat-720.empowerteachernow.workers.dev/download-handbook">
+download>
+
+📘 Download Handbook
+
+</a>
+
+<a class="btn secondary"
+href="https://chat.whatsapp.com/YOUR-LINK">
+
+Join ETF WhatsApp Community
+
+</a>
+
+<div class="next">
+
+<h3>
+
+What's Next?
+
+</h3>
+
+<ul>
+
+<li>Download and save your handbook.</li>
+
+<li>Check your email for your purchase confirmation.</li>
+
+<li>Join the ETF community.</li>
+
+<li>Start applying the strategies immediately.</li>
+
+</ul>
+
+</div>
+
+<div class="footer">
+
+Need help?
+
+support@empowerteacher.com
+
+</div>
+
+</div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+const reference=params.get("reference");
+
+document.getElementById("reference").textContent=reference || "Unavailable";
+
+</script>
+
+</body>
+</html>
