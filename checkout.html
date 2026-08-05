@@ -346,53 +346,43 @@ After Payment
 
 <!-- Your Payment Script -->
 <script>
-function payNow() {
+<button onclick="payNow()">
+    Pay Securely
+</button>
 
-    const paymentMethod =
-        document.querySelector('input[name="payment"]:checked').value;
+<!-- Paystack Library -->
+<script src="https://js.paystack.co/v1/inline.js"></script>
 
-    if (paymentMethod === "mpesa") {
+<!-- Your Checkout Script -->
+<script>
 
-        payWithPaystack();
+async function payNow() {
 
-    } else {
+    const response = await fetch(
+        "https://rapid-hat-720.empowerteachernow.workers.dev/create-payment",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify({
 
-        // Replace with your PayPal checkout URL later
-        window.location.href = "paypal-checkout.html";
+                email: localStorage.getItem("email"),
 
-    }
+                amount:159900
 
-}
-
-function payWithPaystack() {
-
-    let handler = PaystackPop.setup({
-
-        key: "pk_test_bbf8e1d0067bb933c2764d876ba70ddd0c672c09",
-
-        email: "customer@email.com",
-
-        amount: 159900,
-
-        currency: "KES",
-
-        callback: function(response) {
-
-            window.location.href = "thank-you.html";
-
-        },
-
-        onClose: function() {
-
-            alert("Payment cancelled.");
-
+            })
         }
+    );
 
-    });
+    const data = await response.json();
 
-    handler.openIframe();
+    window.location.href = data.authorization_url;
 
 }
+
 </script>
+
 </body>
 </html>
+
