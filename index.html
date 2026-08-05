@@ -480,7 +480,8 @@ const email = document.getElementById("email").value;
 localStorage.setItem("name", name);
 localStorage.setItem("email", email);
 
-
+console.log("Saved email:", localStorage.getItem("email"));
+      
 const data = {
     name: name,
     email: email,
@@ -531,15 +532,15 @@ const data = {
 
                     // Premium products go directly to their pages
                     if (offer === "handbook") {
-                        window.location.href = "handbook.html";
+                        window.location.href = "/etf/handbook.html";
                     }
                     else if (offer === "mentorship") {
-                        window.location.href = "corporate.html";
+                        window.location.href = "/etf/corporate.html";
                     }
 
                     // All free resources use ONE thank-you page
                     else {
-                        window.location.href = `thankyounew.html?offer=${offer}`;
+                        window.location.href = `/etf/thankyounew.html?offer=${offer}`;
                     }
 
                 }, 2000);
