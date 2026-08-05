@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Secure Checkout | Global Educator's Job Search Handbook</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--primary:#d4af37;
+--primary-hover:#c19c2e;
+--dark:#052f23;
+--light:#f7f9f8;
+--border:#e6e6e6;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Montserrat,sans-serif;
+background:var(--light);
+color:#333;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:60px 20px;
+}
+
+.checkout{
+display:grid;
+grid-template-columns:1.2fr .8fr;
+gap:40px;
+}
+
+.card{
+background:#fff;
+padding:35px;
+border-radius:18px;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+h1,h2,h3{
+color:var(--dark);
+}
+
+.subtitle{
+margin:15px 0 30px;
+color:#666;
+line-height:1.6;
+}
+
+.summary{
+display:flex;
+justify-content:space-between;
+padding:18px 0;
+border-bottom:1px solid var(--border);
+}
+
+.price{
+font-size:30px;
+font-weight:700;
+color:var(--dark);
+}
+
+.payment-option{
+border:2px solid var(--border);
+padding:18px;
+border-radius:12px;
+margin-top:15px;
+cursor:pointer;
+transition:.3s;
+}
+
+.payment-option:hover{
+border-color:var(--primary);
+}
+
+.payment-option input{
+margin-right:10px;
+}
+
+.payment-option small{
+display:block;
+margin-left:28px;
+margin-top:8px;
+color:#666;
+}
+
+button{
+width:100%;
+margin-top:30px;
+padding:18px;
+border:none;
+border-radius:50px;
+background:var(--primary);
+font-size:18px;
+font-weight:700;
+cursor:pointer;
+}
+
+button:hover{
+background:var(--primary-hover);
+}
+
+.info{
+background:#f7f7f7;
+padding:20px;
+border-radius:12px;
+margin-top:25px;
+line-height:1.8;
+}
+
+.secure{
+margin-top:20px;
+text-align:center;
+font-size:14px;
+color:#666;
+}
+
+@media(max-width:768px){
+
+.checkout{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="checkout">
+
+<!-- LEFT -->
+
+<div class="card">
+
+<h1>Secure Checkout</h1>
+
+<p class="subtitle">
+
+You're one step away from accessing the
+<strong>Global Educator's Job Search Handbook.</strong>
+
+</p>
+
+<h3>Order Summary</h3>
+
+<div class="summary">
+
+<span>Global Educator's Job Search Handbook</span>
+
+<strong>Digital Download</strong>
+
+</div>
+
+<div class="summary">
+
+<span>Price (Kenya)</span>
+
+<strong>KSh 1,599</strong>
+
+</div>
+
+<div class="summary">
+
+<span>Price (International)</span>
+
+<strong>US$12.50</strong>
+
+</div>
+
+<div class="summary">
+
+<span>Total</span>
+
+<span class="price">Choose your payment method below</span>
+
+</div>
+
+<h3 style="margin-top:35px;">Select Payment Method</h3>
+
+<label class="payment-option">
+
+<input type="radio" name="payment" checked>
+
+<strong>M-Pesa (Kenya)</strong>
+
+<small>
+Pay <strong>KSh 1,599</strong> securely via M-Pesa.
+</small>
+
+</label>
+
+<label class="payment-option">
+
+<input type="radio" name="payment">
+
+<strong>PayPal (International)</strong>
+
+<small>
+Pay <strong>US$12.50</strong> securely with your PayPal account or supported cards.
+</small>
+
+</label>
+
+<button>
+
+Proceed to Secure Payment
+
+</button>
+
+<div class="secure">
+
+🔒 Secure Checkout • Instant Digital Delivery After Payment
+
+</div>
+
+</div>
+
+<!-- RIGHT -->
+
+<div class="card">
+
+<h2>What You'll Receive</h2>
+
+<div class="info">
+
+✔ Complete international job search strategy<br>
+✔ International CV templates<br>
+✔ Cover letter examples<br>
+✔ Interview preparation guide<br>
+✔ Salary negotiation strategies<br>
+✔ Country comparison guide<br>
+✔ Relocation checklist<br>
+✔ Bonus downloadable resources
+
+</div>
+
+<div class="info">
+
+<strong>Instant Access</strong>
+
+<p>
+
+Once your payment is confirmed:
+
+</p>
+
+<ul style="margin-left:20px;margin-top:10px;line-height:2;">
+
+<li>You'll be redirected to a download page.</li>
+
+<li>A download link will be sent to your registered email.</li>
+
+<li>You can download the handbook immediately.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
