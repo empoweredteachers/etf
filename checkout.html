@@ -346,6 +346,41 @@ After Payment
 </div>
 
 </div>
+    <script src="https://js.paystack.co/v1/inline.js">
 
+
+function payWithPaystack() {
+
+    let handler = PaystackPop.setup({
+
+        key: "pk_test_bbf8e1d0067bb933c2764d876ba70ddd0c672c09",
+
+        email: "customer@email.com",
+
+        amount: 159900,   // KSh 1,599
+
+        currency: "KES",
+
+        callback: function(response) {
+
+            alert("Payment successful!");
+
+            window.location.href = "thank-you.html";
+
+        },
+
+        onClose: function() {
+
+            alert("Payment cancelled.");
+
+        }
+
+    });
+
+    handler.openIframe();
+
+}
+
+</script>
 </body>
 </html>
