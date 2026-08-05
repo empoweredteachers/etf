@@ -196,15 +196,18 @@ async function verifyPayment(){
 
         console.log(data);
 
-        if(data.success){
+       if(data.success){
 
-            window.location.href="success.html?reference="+reference;
+    localStorage.setItem("downloadLink", data.download);
 
-        }else{
+    window.location.href =
+        "success.html?reference=" + reference;
 
-            window.location.href="failed.html";
+}else{
 
-        }
+    window.location.href="failed.html";
+
+}
 
     }
 
