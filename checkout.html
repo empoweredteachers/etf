@@ -340,22 +340,18 @@ After Payment
 </div>
 
 </div>
- 
-<!-- Paystack Library -->
-<script src="https://js.paystack.co/v1/inline.js"></script>
-
-<!-- Your Payment Script -->
-<script>
-<button onclick="payNow()">
+    <button onclick="payNow()">
     Pay Securely
 </button>
+ 
+<!-- Your Payment Script -->
+
 
 <!-- Paystack Library -->
 <script src="https://js.paystack.co/v1/inline.js"></script>
 
 <!-- Your Checkout Script -->
 <script>
-
 
 async function payNow() {
 
@@ -366,15 +362,18 @@ async function payNow() {
         return;
     }
 
+
     try {
 
         const response = await fetch(
             "https://rapid-hat-720.empowerteachernow.workers.dev/create-payment",
             {
                 method: "POST",
+
                 headers: {
                     "Content-Type": "application/json"
                 },
+
                 body: JSON.stringify({
 
                     email: email,
@@ -395,26 +394,24 @@ async function payNow() {
 
         } else {
 
-            alert("Unable to start payment. Please try again.");
-
             console.log(data);
+
+            alert("Payment could not be started.");
 
         }
 
 
-    } catch (error) {
+    } catch(error) {
 
-        console.error("Payment error:", error);
+        console.error(error);
 
-        alert("Payment connection failed. Please try again.");
+        alert("Payment connection failed.");
 
     }
 
 }
 
-
 </script>
-
 </body>
 </html>
 
