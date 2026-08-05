@@ -286,24 +286,18 @@ Choose Your Payment Method
 </h3>
 
 <label class="payment-option">
-
-<input type="radio" name="payment" checked>
-
-<strong>M-Pesa (Kenya)</strong>
-
-<p>
-
-Pay <strong>KSh 1,599</strong> securely using M-Pesa.
+    <input type="radio" name="payment" value="mpesa" checked>
+    <strong> Securely usingM-Pesa (Kenya)</strong>
+</label>
 
 </p>
 
 </label>
 
 <label class="payment-option">
-
-<input type="radio" name="payment">
-
-<strong>PayPal (International)</strong>
+    <input type="radio" name="payment" value="paypal">
+    <strong>PayPal (International)</strong>
+</label>
 
 <p>
 
@@ -313,9 +307,11 @@ Pay <strong>US$12.50</strong> securely using your PayPal account.
 
 </label>
 
-    <button onclick="payWithPaystack()">
+    <button onclick="payNow()">
     Pay Securely
 </button>
+
+
 
 <div class="next">
 
@@ -350,6 +346,23 @@ After Payment
 
 <!-- Your Payment Script -->
 <script>
+function payNow() {
+
+    const paymentMethod =
+        document.querySelector('input[name="payment"]:checked').value;
+
+    if (paymentMethod === "mpesa") {
+
+        payWithPaystack();
+
+    } else {
+
+        // Replace with your PayPal checkout URL later
+        window.location.href = "paypal-checkout.html";
+
+    }
+
+}
 
 function payWithPaystack() {
 
@@ -359,13 +372,11 @@ function payWithPaystack() {
 
         email: "customer@email.com",
 
-        amount: 159900,   // KSh 1,599
+        amount: 159900,
 
         currency: "KES",
 
         callback: function(response) {
-
-            alert("Payment successful!");
 
             window.location.href = "thank-you.html";
 
@@ -382,7 +393,6 @@ function payWithPaystack() {
     handler.openIframe();
 
 }
-
 </script>
 </body>
 </html>
