@@ -468,13 +468,24 @@ document.addEventListener("DOMContentLoaded", () => {
         message.style.color = "#D4AF37";
 
         // Get selected offer
-        const offer = localStorage.getItem("selectedOffer") || "community";
+       // Get selected offer
+const offer = localStorage.getItem("selectedOffer") || "community";
 
-        const data = {
-            name: document.getElementById("name").value,
-            email: document.getElementById("email").value,
-            offer: offer
-        };
+
+const name = document.getElementById("name").value;
+const email = document.getElementById("email").value;
+
+
+// Save customer details for payment
+localStorage.setItem("name", name);
+localStorage.setItem("email", email);
+
+
+const data = {
+    name: name,
+    email: email,
+    offer: offer
+};
 
         try {
 
