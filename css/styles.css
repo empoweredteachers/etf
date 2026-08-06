@@ -478,6 +478,7 @@ img{
     background:var(--light);
 
     color:var(--text-dark);
+      color:#333;
 
 }
 
