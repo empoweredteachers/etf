@@ -166,6 +166,9 @@ img{
 .resource-content .btn-primary{
     margin-top:15px;
 }
+.resource-body{
+    width:100%;
+}
 
 
 /* ========================================
