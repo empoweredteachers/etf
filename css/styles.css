@@ -1197,7 +1197,37 @@ Keeping for future reference only.
 }
 
 }
+/* ===== RESOURCE DEBUG ===== */
 
+.resource-content{
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    color:#222 !important;
+    background:#fff8dc !important;
+    border:2px solid red !important;
+    min-height:300px;
+}
+
+.resource-content *{
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    color:#222 !important;
+}
+
+.resource-content h3{
+    color:red !important;
+    font-size:32px !important;
+}
+
+.resource-content p{
+    color:blue !important;
+}
+
+.resource-content li{
+    color:green !important;
+}
 ==================================================*/
 
 
