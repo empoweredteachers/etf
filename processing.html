@@ -159,7 +159,7 @@ async function verifyPayment(){
     const params = new URLSearchParams(window.location.search);
 
     const reference = params.get("reference");
-
+console.log("Payment reference:", reference);
     if(!reference){
 
         window.location.href="failed.html";
