@@ -383,6 +383,89 @@ selectedProducts.forEach(product => {
 
 });
 </script>
+<script>
 
+const workerURL =
+"https://rapid-hat-720.empowerteachernow.workers.dev";
+
+
+const token = localStorage.getItem("downloadToken");
+
+
+const products = JSON.parse(
+    localStorage.getItem("purchasedProducts") || "[]"
+);
+
+
+const productNames = {
+
+    handbook:
+    "Global Educator's Job Search Handbook",
+
+    corporate:
+    "Corporate To Classroom Guide",
+
+    timeless:
+    "Timeless Job Search Strategies"
+
+};
+
+
+const downloadArea =
+document.getElementById("downloadArea");
+
+
+if (!token || products.length === 0) {
+
+    downloadArea.innerHTML = `
+        <p>
+        No downloadable products found.
+        Please contact support.
+        </p>
+    `;
+
+} else {
+
+
+    products.forEach(product => {
+
+
+        const button =
+        document.createElement("a");
+
+
+        button.className = "btn";
+
+
+        button.href =
+        `${workerURL}/download?token=${token}&product=${product}`;
+
+
+        button.textContent =
+        "📘 Download " + productNames[product];
+
+
+        button.style.display =
+        "block";
+
+
+        button.style.margin =
+        "15px auto";
+
+
+        button.target =
+        "_blank";
+
+
+        downloadArea.appendChild(button);
+
+
+    });
+
+
+}
+
+
+</script>
 </body>
 </html>
