@@ -1,0 +1,183 @@
+<!-- ================= EVENTS ================= -->
+<!-- Paste this whole <section> into index.html, e.g. right after
+     the "community" stats section and before "join" -->
+
+<section id="events" class="events">
+
+    <div class="container">
+
+        <h2 class="section-title">Upcoming Events</h2>
+
+        <p class="section-text">
+            Register below to secure your spot. You'll get an instant confirmation,
+            and your access code will be emailed a few days before the event.
+        </p>
+
+        <div class="events-grid" id="eventsGrid">
+            <p>Loading events...</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ============ Registration Modal ============ -->
+<div id="eventModal" class="event-modal" hidden>
+
+    <div class="event-modal-content">
+
+        <button type="button" class="event-modal-close" id="eventModalClose">&times;</button>
+
+        <h3 id="eventModalTitle">Register</h3>
+        <p id="eventModalDate"></p>
+
+        <form id="eventRegisterForm">
+
+            <input type="text" id="eventName" placeholder="Your Name" required>
+            <input type="email" id="eventEmail" placeholder="Email Address" required>
+
+            <button type="submit" id="eventSubmitBtn">Register</button>
+
+            <p id="eventFormMessage"></p>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- Styling for this section lives in events-section.css —
+     append its contents to your existing styles.css -->
+
+<script>
+
+const EVENTS_WORKER_URL = "https://rapid-hat-720.empowerteachernow.workers.dev";
+
+let currentEvent = null;
+
+// ---- Load & render events ----
+async function loadEvents() {
+
+    const grid = document.getElementById("eventsGrid");
+
+    try {
+
+        const res = await fetch(`${EVENTS_WORKER_URL}/events`);
+        const data = await res.json();
+
+        if (!data.success || data.events.length === 0) {
+            grid.innerHTML = "<p>No upcoming events right now — check back soon!</p>";
+            return;
+        }
+
+        grid.innerHTML = "";
+
+        data.events.forEach(event => {
+
+            const dateLabel = new Date(event.date).toLocaleString("en-GB", {
+                dateStyle: "full",
+                timeStyle: "short"
+            });
+
+            const priceLabel = event.price > 0
+                ? `${event.currency} ${event.price.toLocaleString()}`
+                : "Free";
+
+            const card = document.createElement("div");
+            card.className = "event-card";
+
+            card.innerHTML = `
+                <span class="event-date">${dateLabel}</span>
+                <h3>${event.title}</h3>
+                <p>${event.description || ""}</p>
+                <div class="event-price">${priceLabel}</div>
+                <button type="button" data-id="${event.id}">Register</button>
+            `;
+
+            card.querySelector("button").addEventListener("click", () => openEventModal(event));
+
+            grid.appendChild(card);
+
+        });
+
+    } catch (err) {
+        console.error(err);
+        grid.innerHTML = "<p>Unable to load events right now.</p>";
+    }
+
+}
+
+// ---- Modal open/close ----
+function openEventModal(event) {
+
+    currentEvent = event;
+
+    document.getElementById("eventModalTitle").textContent = `Register: ${event.title}`;
+    document.getElementById("eventModalDate").textContent =
+        new Date(event.date).toLocaleString("en-GB", { dateStyle: "full", timeStyle: "short" });
+
+    document.getElementById("eventFormMessage").textContent = "";
+    document.getElementById("eventRegisterForm").reset();
+    document.getElementById("eventModal").hidden = false;
+}
+
+document.getElementById("eventModalClose").addEventListener("click", () => {
+    document.getElementById("eventModal").hidden = true;
+});
+
+// ---- Registration submit ----
+document.getElementById("eventRegisterForm").addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    const submitBtn = document.getElementById("eventSubmitBtn");
+    const message = document.getElementById("eventFormMessage");
+
+    const name = document.getElementById("eventName").value;
+    const email = document.getElementById("eventEmail").value;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Registering...";
+    message.textContent = "";
+
+    try {
+
+        const res = await fetch(`${EVENTS_WORKER_URL}/events/register`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ eventId: currentEvent.id, name, email })
+        });
+
+        const data = await res.json();
+
+        if (!data.success) {
+            message.textContent = data.error || "Something went wrong. Please try again.";
+            message.style.color = "red";
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Register";
+            return;
+        }
+
+        if (data.free) {
+            // Free event — confirmed immediately
+            message.style.color = "green";
+            message.textContent = "You're registered! Check your email for confirmation.";
+            submitBtn.textContent = "Registered ✓";
+        } else {
+            // Paid event — redirect to Paystack
+            window.location.href = data.authorization_url;
+        }
+
+    } catch (err) {
+        console.error(err);
+        message.textContent = "Unable to connect. Please check your internet connection.";
+        message.style.color = "red";
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Register";
+    }
+
+});
+
+loadEvents();
+
+</script>
