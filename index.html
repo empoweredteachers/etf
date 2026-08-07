@@ -513,8 +513,17 @@ function updateCheckoutBar() {
 
     bar.hidden = false;
 
-    const totalKes = selected.length * PRODUCT_PRICE_KES;
-    const totalUsd = (selected.length * PRODUCT_PRICE_USD).toFixed(2);
+ let totalKes = 0;
+let totalUsd = 0;
+
+selected.forEach(product => {
+
+    totalKes += PRODUCTS[product].priceKes;
+    totalUsd += PRODUCTS[product].priceUsd;
+
+});
+
+totalUsd = totalUsd.toFixed(2);
 
     summary.textContent =
         `${selected.length} item${selected.length > 1 ? "s" : ""} selected — ` +
