@@ -69,7 +69,7 @@ src="https://www.facebook.com/tr?id=1065874902632784&ev=PageView&noscript=1"/>
 
         <a href="#community" class="btn">Join Us</a>
   </div>
-
+<section class="hero">
   <div class="hero-image">
     <img src="images/hero-image.png" alt="Teachers">
   </div>
@@ -467,9 +467,29 @@ function setOffer(offer) {
 
 // ===== Multi-select product checkout (Handbook / Corporate / Timeless) =====
 
-const PRODUCT_PRICE_KES = 1599;
-const PRODUCT_PRICE_USD = 12.50;
+//const PRODUCT_PRICE_KES = 1599;
+//const PRODUCT_PRICE_USD = 12.50;
 
+
+const PRODUCTS = {
+
+    handbook: {
+        priceKes: 1599,
+        priceUsd: 12.50
+    },
+
+    corporate: {
+        priceKes: 1599,
+        priceUsd: 12.50
+    },
+
+    timeless: {
+        priceKes: 999,
+        priceUsd: 8.50
+    }
+
+};
+  
 function getSelectedOffers() {
     return JSON.parse(localStorage.getItem("selectedOffers") || "[]");
 }
@@ -542,11 +562,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (selected.length === 0) return;
 
-            const email = localStorage.getItem("email");
+            const name = localStorage.getItem("name");
+          const email = localStorage.getItem("email");
 
-            if (email) {
+          if (name && email) {
+    window.location.href = "checkout.html";
                 // Already have their details — go straight to checkout
-                window.location.href = "checkout.html";
+               
             } else {
                 // Need name + email first — scroll to the join form,
                 // its submit handler will redirect to checkout.html
