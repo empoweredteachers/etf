@@ -685,14 +685,16 @@ const data = {
 
                     // One or more products picked via the checkboxes —
                     // send them to the multi-product checkout page.
-                    if (selectedOffers.length > 0) {
-                        window.location.href = "checkout.html";
-                    }
+                   const selectedOffers = getSelectedOffers();
 
-                    // All free resources use ONE thank-you page
-                    else {
-                        window.location.href = `/etf/thankyounew.html?offer=${offer}`;
-                    }
+if (
+    selectedOffers.length > 0 &&
+    !offer.startsWith("free-")
+) {
+    window.location.href = "checkout.html";
+} else {
+    window.location.href = `/etf/thankyounew.html?offer=${offer}`;
+}
 
                 }, 2000);
 
