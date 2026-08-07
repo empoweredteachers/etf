@@ -466,9 +466,16 @@ What Teachers Say
 </footer>
   
 <script>
-function setOffer(offer) {
+  function setOffer(offer) {
+
+    // If it's a free resource, clear paid selections
+    if (offer.startsWith("free-")) {
+        localStorage.removeItem("selectedOffers");
+    }
+
     localStorage.setItem("selectedOffer", offer);
 }
+
 
 // ===== Multi-select product checkout (Handbook / Corporate / Timeless) =====
 
