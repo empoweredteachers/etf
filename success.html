@@ -301,11 +301,7 @@ Your Purchase Includes
 
 </div>
 
-<a class="btn"
-href="https://rapid-hat-720.empowerteachernow.workers.dev/download-handbook">
-Download Handbook
-
-</a>
+<div id="downloads"></div>
 
 <a class="btn secondary"
 href="https://chat.whatsapp.com/YOUR-LINK">
@@ -354,6 +350,38 @@ const reference=params.get("reference");
 
 document.getElementById("reference").textContent=reference || "Unavailable";
 
+// selecting downloads
+
+    const selectedProducts = JSON.parse(
+    localStorage.getItem("selectedOffers") || "[]"
+);
+
+const productNames = {
+    handbook: "Global Educator's Job Search Handbook",
+    corporate: "Corporate To Classroom Guide",
+    timeless: "Timeless Job Search Strategies"
+};
+
+const downloads = document.getElementById("downloads");
+
+selectedProducts.forEach(product => {
+
+    const link = document.createElement("a");
+
+    link.className = "btn";
+
+    link.href =
+        `https://rapid-hat-720.empowerteachernow.workers.dev/download?product=${product}`;
+
+    link.textContent =
+        "📘 Download " + productNames[product];
+
+    downloads.appendChild(link);
+
+    downloads.appendChild(document.createElement("br"));
+    downloads.appendChild(document.createElement("br"));
+
+});
 </script>
 
 </body>
