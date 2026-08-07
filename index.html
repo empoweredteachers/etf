@@ -476,7 +476,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Get selected offer
        // Get selected offer
-const offer = localStorage.getItem("selectedOffer") || "community";
+const offer = (localStorage.getItem("selectedOffer") || "community").trim();
+
+console.log("Offer:", `"${offer}"`);
+console.log("Length:", offer.length);
 
 
 const name = document.getElementById("name").value;
