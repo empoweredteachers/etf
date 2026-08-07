@@ -785,7 +785,8 @@ img{
 
     padding-bottom:20px;
 
-    scroll-snap-type:x mandatory;
+    scroll-behavior:auto;   /* stop fighting the JS auto-scroll */
+    scroll-snap-type:none;  /* remove snapping so it can glide continuously */
 
 }
 
@@ -801,7 +802,7 @@ img{
 
     border-radius:15px;
 
-    scroll-snap-align:center;
+    /* scroll-snap-align removed — no longer needed without snap-type */
 
 }
 
