@@ -162,7 +162,9 @@ src="https://www.facebook.com/tr?id=1065874902632784&ev=PageView&noscript=1"/>
 
                     <a href="#join"
                        class="btn-primary"
-                       onclick="setOffer('free-checklist')">
+                       onclick="localStorage.removeItem('selectedOffers');
+                        setOffer('free-checklist');">
+                      
                         Download Free Checklist
                     </a>
 
@@ -206,7 +208,10 @@ src="https://www.facebook.com/tr?id=1065874902632784&ev=PageView&noscript=1"/>
 
                     <a href="#join"
                        class="btn-primary"
-                       onclick="setOffer('free-ai-cv')">
+                      onclick="
+                            localStorage.removeItem('selectedOffers');
+                            setOffer('free-ai-cv');
+                            ">
                         Download AI CV Prompt
                     </a>
 
