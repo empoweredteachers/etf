@@ -114,8 +114,11 @@ h1{
 
 }
 
+/* ===== Payment options ===== */
+
 .payment-option{
 
+    display:block;
     border:2px solid var(--border);
     border-radius:12px;
     padding:18px;
@@ -131,9 +134,28 @@ h1{
 
 }
 
+.payment-option.selected{
+
+    border-color:var(--gold);
+    background:#fffdf5;
+
+}
+
+.option-header{
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+}
+
 .payment-option input{
 
-    margin-right:10px;
+    flex:0 0 auto;
+    width:20px;
+    height:20px;
+    accent-color:var(--gold);
+    margin:0;
 
 }
 
@@ -146,7 +168,7 @@ h1{
 .payment-option p{
 
     margin-top:8px;
-    margin-left:28px;
+    margin-left:32px;
     color:#666;
     font-size:14px;
     line-height:1.6;
@@ -171,6 +193,13 @@ button{
 button:hover{
 
     background:var(--gold-hover);
+
+}
+
+button:disabled{
+
+    opacity:.7;
+    cursor:not-allowed;
 
 }
 
@@ -210,7 +239,27 @@ button:hover{
 
 .checkout-card{
 
-padding:30px 25px;
+    padding:30px 20px;
+
+}
+
+.payment-option{
+
+    padding:16px;
+
+}
+
+.payment-option p{
+
+    /* Full width on small screens instead of a narrow indented column */
+    margin-left:0;
+    margin-top:10px;
+
+}
+
+.option-header strong{
+
+    font-size:15px;
 
 }
 
@@ -285,24 +334,33 @@ Choose Your Payment Method
 
 </h3>
 
-<label class="payment-option">
-    <input type="radio" name="payment" value="mpesa" checked>
-    <strong> Securely usingM-Pesa (Kenya)</strong>
-</label>
+<label class="payment-option" id="option-mpesa">
 
-<label class="payment-option">
-
-    <input type="radio" name="payment" value="paypal">
-
-    <strong>PayPal (International)</strong>
+    <div class="option-header">
+        <input type="radio" name="payment" value="mpesa" checked>
+        <strong>🇰🇪 M-Pesa (Kenya)</strong>
+    </div>
 
     <p>
-        Pay US$12.50 securely using your PayPal account.
+        Pay KSh 1,599 securely using M-Pesa.
     </p>
 
 </label>
 
-    <button onclick="payNow()">
+<label class="payment-option" id="option-cards">
+
+    <div class="option-header">
+        <input type="radio" name="payment" value="cards">
+        <strong>💳 Visa, Mastercard & International Cards</strong>
+    </div>
+
+    <p>
+        Pay US$12.50 securely using your card.
+    </p>
+
+</label>
+
+    <button id="payButton" onclick="payNow()">
     Pay Securely
 </button>
 
@@ -346,6 +404,27 @@ After Payment
 <!-- Your Checkout Script -->
 <script>
 
+// Highlight the selected payment option card
+document.querySelectorAll('input[name="payment"]').forEach((input) => {
+
+    input.addEventListener("change", () => {
+
+        document.querySelectorAll(".payment-option").forEach((el) => {
+            el.classList.remove("selected");
+        });
+
+        input.closest(".payment-option").classList.add("selected");
+
+    });
+
+});
+
+// Mark the default checked option as selected on load
+document.querySelector('input[name="payment"]:checked')
+    .closest(".payment-option")
+    .classList.add("selected");
+
+
 async function payNow() {
 
     const email = localStorage.getItem("email");
@@ -355,6 +434,27 @@ async function payNow() {
         return;
     }
 
+    const selectedMethod = document.querySelector('input[name="payment"]:checked').value;
+
+    // Price depends on which option is selected — previously this was
+    // hardcoded to the KES amount regardless of selection.
+    let amount;
+    let currency;
+
+    if (selectedMethod === "mpesa") {
+        amount = 159900; // KSh 1,599 in kobo/cents
+        currency = "KES";
+    } else {
+        amount = 1250; // US$12.50 in cents
+        currency = "USD";
+        // Runs through Paystack's card checkout (Visa/Mastercard/etc).
+        // Paystack's inline flow already presents a card entry form once
+        // authorization_url is opened, so no separate SDK is needed here.
+    }
+
+    const payButton = document.getElementById("payButton");
+    payButton.disabled = true;
+    payButton.textContent = "Processing...";
 
     try {
 
@@ -371,7 +471,9 @@ async function payNow() {
 
                     email: email,
 
-                    amount: 159900
+                    amount: amount,
+
+                    currency: currency
 
                 })
             }
@@ -391,6 +493,9 @@ if (data.authorization_url) {
 
     alert(JSON.stringify(data, null, 2));
 
+    payButton.disabled = false;
+    payButton.textContent = "Pay Securely";
+
 }
 
 
@@ -400,6 +505,9 @@ if (data.authorization_url) {
 
         alert("Payment connection failed.");
 
+        payButton.disabled = false;
+        payButton.textContent = "Pay Securely";
+
     }
 
 }
@@ -407,4 +515,3 @@ if (data.authorization_url) {
 </script>
 </body>
 </html>
-
