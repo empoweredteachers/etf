@@ -59,7 +59,7 @@ src="https://www.facebook.com/tr?id=1065874902632784&ev=PageView&noscript=1"/>
 
         <section class="hero">
 
-          <div>
+          <div class="hero-content">
 
                 <h1>
                 Empowering Educators to Grow Their
@@ -113,7 +113,8 @@ src="https://www.facebook.com/tr?id=1065874902632784&ev=PageView&noscript=1"/>
     </div>
 
 </section>
-<<!-- ================= FREE RESOURCES ================= -->
+
+<!-- ================= FREE RESOURCES ================= -->
 
 <section id="resources" class="resources">
 
@@ -225,7 +226,7 @@ src="https://www.facebook.com/tr?id=1065874902632784&ev=PageView&noscript=1"/>
 
   <!-- ================= PRODUCTS ================= -->
 
-<section class="products">
+<section class="products" id="products">
 
 <div class="container">
 
@@ -234,13 +235,13 @@ src="https://www.facebook.com/tr?id=1065874902632784&ev=PageView&noscript=1"/>
 <p class="section-text">
 
 Once you've completed the checklist, continue your preparation using
-our practical resources.
+our practical resources. Select one or more below.
 
 </p>
 
-<div class="cards">
+<div class="cards" id="productCards">
 
-<div class="card">
+<div class="card" data-offer="handbook">
 
     <div class="product-image">
         <img src="images/handbook.png" alt="Handbook">
@@ -253,14 +254,13 @@ our practical resources.
         school recruitment.
     </p>
 
-    <a href="#join"
-   class="btn-primary"
-   onclick="setOffer('handbook')">
-   Buy the Handbook
-</a>
-  
+    <label class="select-toggle">
+        <input type="checkbox" class="offer-checkbox" value="handbook">
+        <span>Select — KSh 1,599 / US$12.50</span>
+    </label>
+
 </div>
-<div class="card">
+<div class="card" data-offer="corporate">
   <div class="product-image">
        <img src="images/corporatebook.png" alt="Corporate Guide">
     </div>
@@ -273,14 +273,14 @@ Guidance to successful transitions from the Corporate World into Teaching.
 
 </p>
 
-<a href="#join"
-   class="btn-primary"
-   onclick="setOffer('corporate')">
-   Get the Guide
-</a>
+<label class="select-toggle">
+    <input type="checkbox" class="offer-checkbox" value="corporate">
+    <span>Select — KSh 1,599 / US$12.50</span>
+</label>
+
 </div>
 
-<div class="card">
+<div class="card" data-offer="timeless">
   <div class="product-image">
        <img src="images/timelesssearch.png" alt="Interview Guide"> 
     </div>
@@ -294,12 +294,22 @@ Prepare confidently for interviews with you next schools.
 
 </p>
 
-<a href="#join"
-   class="btn-primary"
-   onclick="setOffer('timeless')">
-   Get the Strategies 
-</a>
+<label class="select-toggle">
+    <input type="checkbox" class="offer-checkbox" value="timeless">
+    <span>Select — KSh 1,599 / US$12.50</span>
+</label>
+
 </div>
+
+</div>
+
+<div class="checkout-bar" id="checkoutBar" hidden>
+
+    <span id="checkoutSummary"></span>
+
+    <button type="button" id="proceedBtn" class="btn-primary">
+        Proceed to Checkout
+    </button>
 
 </div>
 
@@ -387,7 +397,11 @@ What Teachers Say
 </div>
 
 </div>
+
+</div>
+
 </section>
+
 <section id="join" class="community-section">
 
     <div class="container">
@@ -430,12 +444,6 @@ What Teachers Say
 
 </section>
 
-
-
-</div>
-
-</section>
-
 <footer id="footer">
 
 <div class="container">
@@ -460,6 +468,100 @@ What Teachers Say
 function setOffer(offer) {
     localStorage.setItem("selectedOffer", offer);
 }
+
+// ===== Multi-select product checkout (Handbook / Corporate / Timeless) =====
+
+const PRODUCT_PRICE_KES = 1599;
+const PRODUCT_PRICE_USD = 12.50;
+
+function getSelectedOffers() {
+    return JSON.parse(localStorage.getItem("selectedOffers") || "[]");
+}
+
+function saveSelectedOffers(offers) {
+    localStorage.setItem("selectedOffers", JSON.stringify(offers));
+}
+
+function updateCheckoutBar() {
+
+    const selected = getSelectedOffers();
+    const bar = document.getElementById("checkoutBar");
+    const summary = document.getElementById("checkoutSummary");
+
+    if (!bar) return;
+
+    if (selected.length === 0) {
+        bar.hidden = true;
+        return;
+    }
+
+    bar.hidden = false;
+
+    const totalKes = selected.length * PRODUCT_PRICE_KES;
+    const totalUsd = (selected.length * PRODUCT_PRICE_USD).toFixed(2);
+
+    summary.textContent =
+        `${selected.length} item${selected.length > 1 ? "s" : ""} selected — ` +
+        `KSh ${totalKes.toLocaleString()} / US$${totalUsd}`;
+
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    // Restore any previously selected checkboxes (e.g. coming back from checkout)
+    const alreadySelected = getSelectedOffers();
+
+    document.querySelectorAll(".offer-checkbox").forEach((checkbox) => {
+
+        checkbox.checked = alreadySelected.includes(checkbox.value);
+
+        checkbox.addEventListener("change", () => {
+
+            let selected = getSelectedOffers();
+
+            if (checkbox.checked) {
+                if (!selected.includes(checkbox.value)) {
+                    selected.push(checkbox.value);
+                }
+            } else {
+                selected = selected.filter((v) => v !== checkbox.value);
+            }
+
+            saveSelectedOffers(selected);
+            updateCheckoutBar();
+
+        });
+
+    });
+
+    updateCheckoutBar();
+
+    const proceedBtn = document.getElementById("proceedBtn");
+
+    if (proceedBtn) {
+
+        proceedBtn.addEventListener("click", () => {
+
+            const selected = getSelectedOffers();
+
+            if (selected.length === 0) return;
+
+            const email = localStorage.getItem("email");
+
+            if (email) {
+                // Already have their details — go straight to checkout
+                window.location.href = "checkout.html";
+            } else {
+                // Need name + email first — scroll to the join form,
+                // its submit handler will redirect to checkout.html
+                document.getElementById("join").scrollIntoView({ behavior: "smooth" });
+            }
+
+        });
+
+    }
+
+});
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -540,12 +642,12 @@ const data = {
                 // Wait 2 seconds then redirect
                 setTimeout(() => {
 
-                    // Premium products go directly to their pages
-                    if (offer === "handbook") {
-                        window.location.href = "/etf/handbook.html";
-                    }
-                    else if (offer === "mentorship") {
-                        window.location.href = "/etf/corporate.html";
+                    const selectedOffers = getSelectedOffers();
+
+                    // One or more products picked via the checkboxes —
+                    // send them to the multi-product checkout page.
+                    if (selectedOffers.length > 0) {
+                        window.location.href = "checkout.html";
                     }
 
                     // All free resources use ONE thank-you page
