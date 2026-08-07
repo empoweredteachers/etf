@@ -159,7 +159,11 @@ async function verifyPayment(){
     const params = new URLSearchParams(window.location.search);
 
     const reference = params.get("reference");
-console.log("Payment reference:", reference);
+
+
+    console.log("Payment reference:", reference);
+
+
     if(!reference){
 
         window.location.href="failed.html";
@@ -168,9 +172,28 @@ console.log("Payment reference:", reference);
 
     }
 
-    document.getElementById("status").textContent="Confirming payment...";
+
+    document.getElementById("status").textContent =
+    "Confirming payment...";
+
 
     try{
+
+
+        // Get products selected before payment
+
+        const selectedProducts = JSON.parse(
+
+            localStorage.getItem("selectedOffers") || "[]"
+
+        );
+
+
+        console.log(
+            "Purchased products:",
+            selectedProducts
+        );
+
 
         const response = await fetch(
 
@@ -181,59 +204,116 @@ console.log("Payment reference:", reference);
                 method:"POST",
 
                 headers:{
+
                     "Content-Type":"application/json"
+
                 },
 
-                const selectedProducts = JSON.parse(
-    localStorage.getItem("selectedOffers") || "[]"
-                    );
-                    
-                    body: JSON.stringify({
-                        reference: reference,
-                        products: selectedProducts
-                    })
+                body:JSON.stringify({
+
+                    reference: reference,
+
+                    products: selectedProducts
+
+                })
 
             }
 
         );
 
+
         const data = await response.json();
 
-        console.log(data);
 
-      if (data.success) {
+        console.log(
+            "Worker response:",
+            data
+        );
 
-    // Save the secure download token
-    localStorage.setItem("downloadToken", data.token);
 
-    // Save what the customer purchased
-    localStorage.setItem(
-        "purchasedProducts",
-        JSON.stringify(selectedProducts)
-    );
 
-    window.location.href =
-        "success.html?reference=" + reference;
+        if(data.success){
 
-} else {
 
-    window.location.href = "failed.html";
+            // Save secure download token
 
-}
+            localStorage.setItem(
+
+                "downloadToken",
+
+                data.token
+
+            );
+
+
+            // Save purchased products
+
+            localStorage.setItem(
+
+                "purchasedProducts",
+
+                JSON.stringify(selectedProducts)
+
+            );
+
+
+            console.log(
+                "Download token saved:",
+                data.token
+            );
+
+
+
+            window.location.href =
+
+            "success.html?reference=" + reference;
+
+
+
+        }
+
+        else{
+
+
+            console.error(
+                "Payment verification failed",
+                data
+            );
+
+
+            window.location.href="failed.html";
+
+
+        }
+
+
 
     }
+
 
     catch(error){
 
-        console.error(error);
+
+        console.error(
+            "Verification error:",
+            error
+        );
+
 
         window.location.href="failed.html";
 
+
     }
+
 
 }
 
+
+
 verifyPayment();
+
+
+
 
 </script>
 
