@@ -184,9 +184,14 @@ async function verifyPayment(){
                     "Content-Type":"application/json"
                 },
 
-                body:JSON.stringify({
-                    reference:reference
-                })
+                const selectedProducts = JSON.parse(
+    localStorage.getItem("selectedOffers") || "[]"
+                    );
+                    
+                    body: JSON.stringify({
+                        reference: reference,
+                        products: selectedProducts
+                    })
 
             }
 
@@ -196,16 +201,23 @@ async function verifyPayment(){
 
         console.log(data);
 
-       if(data.success){
+      if (data.success) {
 
-    localStorage.setItem("downloadLink", data.download);
+    // Save the secure download token
+    localStorage.setItem("downloadToken", data.token);
+
+    // Save what the customer purchased
+    localStorage.setItem(
+        "purchasedProducts",
+        JSON.stringify(selectedProducts)
+    );
 
     window.location.href =
         "success.html?reference=" + reference;
 
-}else{
+} else {
 
-    window.location.href="failed.html";
+    window.location.href = "failed.html";
 
 }
 
