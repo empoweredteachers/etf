@@ -346,14 +346,17 @@ support@empowerteacher.com
 
 const params = new URLSearchParams(window.location.search);
 
-const reference=params.get("reference");
+const reference = params.get("reference");
 
-document.getElementById("reference").textContent=reference || "Unavailable";
+document.getElementById("reference").textContent = reference || "Unavailable";
 
-// selecting downloads
+const workerURL =
+"https://rapid-hat-720.empowerteachernow.workers.dev";
 
-    const selectedProducts = JSON.parse(
-    localStorage.getItem("selectedOffers") || "[]"
+const token = localStorage.getItem("downloadToken");
+
+const products = JSON.parse(
+    localStorage.getItem("purchasedProducts") || "[]"
 );
 
 const productNames = {
@@ -364,60 +367,9 @@ const productNames = {
 
 const downloads = document.getElementById("downloads");
 
-selectedProducts.forEach(product => {
-
-    const link = document.createElement("a");
-
-    link.className = "btn";
-
-    link.href =
-        `https://rapid-hat-720.empowerteachernow.workers.dev/download?product=${product}`;
-
-    link.textContent =
-        "📘 Download " + productNames[product];
-
-    downloads.appendChild(link);
-
-    downloads.appendChild(document.createElement("br"));
-    downloads.appendChild(document.createElement("br"));
-
-});
-</script>
-<script>
-
-const workerURL =
-"https://rapid-hat-720.empowerteachernow.workers.dev";
-
-
-const token = localStorage.getItem("downloadToken");
-
-
-const products = JSON.parse(
-    localStorage.getItem("purchasedProducts") || "[]"
-);
-
-
-const productNames = {
-
-    handbook:
-    "Global Educator's Job Search Handbook",
-
-    corporate:
-    "Corporate To Classroom Guide",
-
-    timeless:
-    "Timeless Job Search Strategies"
-
-};
-
-
-const downloadArea =
-document.getElementById("downloadArea");
-
-
 if (!token || products.length === 0) {
 
-    downloadArea.innerHTML = `
+    downloads.innerHTML = `
         <p>
         No downloadable products found.
         Please contact support.
@@ -426,46 +378,29 @@ if (!token || products.length === 0) {
 
 } else {
 
-
     products.forEach(product => {
 
-
-        const button =
-        document.createElement("a");
-
+        const button = document.createElement("a");
 
         button.className = "btn";
 
-
         button.href =
-        `${workerURL}/download?token=${token}&product=${product}`;
-
+            `${workerURL}/download?token=${token}&product=${product}`;
 
         button.textContent =
-        "📘 Download " + productNames[product];
+            "📘 Download " + productNames[product];
 
+        button.target = "_blank";
 
-        button.style.display =
-        "block";
+        downloads.appendChild(button);
 
-
-        button.style.margin =
-        "15px auto";
-
-
-        button.target =
-        "_blank";
-
-
-        downloadArea.appendChild(button);
-
+        downloads.appendChild(document.createElement("br"));
 
     });
 
-
 }
 
-
 </script>
+
 </body>
 </html>
