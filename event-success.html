@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Registration Confirmed | Empowered Teachers Forum</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --green:#052f23;
+    --gold:#d4af37;
+    --gold-hover:#c19c2e;
+    --light:#f7f9f8;
+    --success:#2e7d32;
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+body{
+    font-family:'Montserrat',sans-serif;
+    background:var(--light);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:25px;
+}
+
+.card{
+    width:100%;
+    max-width:600px;
+    background:#fff;
+    border-radius:22px;
+    padding:50px;
+    text-align:center;
+    box-shadow:0 15px 45px rgba(0,0,0,.08);
+}
+
+.logo{
+    font-size:14px;
+    font-weight:700;
+    color:var(--green);
+    letter-spacing:1px;
+    margin-bottom:20px;
+}
+
+.check{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    background:var(--success);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:60px;
+    margin:0 auto 30px;
+}
+
+h1{
+    color:var(--green);
+    margin-bottom:15px;
+    font-size:32px;
+}
+
+.subtitle{
+    color:#666;
+    line-height:1.8;
+    margin-bottom:30px;
+}
+
+.event-info{
+    background:#f8f8f8;
+    border-radius:16px;
+    padding:25px;
+    text-align:left;
+    margin-bottom:30px;
+}
+
+.event-info h3{
+    color:var(--green);
+    margin-bottom:10px;
+}
+
+.reference{
+    background:#eef8f1;
+    border-left:5px solid var(--success);
+    padding:18px;
+    border-radius:10px;
+    margin-bottom:30px;
+}
+
+.btn{
+    display:block;
+    width:100%;
+    text-decoration:none;
+    background:var(--gold);
+    color:white;
+    padding:16px;
+    border-radius:50px;
+    font-weight:700;
+    font-size:16px;
+    margin-bottom:14px;
+    transition:.3s;
+}
+
+.btn:hover{ background:var(--gold-hover); }
+
+.btn.secondary{ background:var(--green); }
+
+.note{
+    margin-top:30px;
+    color:#777;
+    font-size:14px;
+    line-height:1.7;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="logo">EMPOWERED TEACHERS FORUM</div>
+
+    <div class="check">✓</div>
+
+    <h1>Registration Confirmed</h1>
+
+    <p class="subtitle">
+        You're all set. A confirmation email with calendar links is on its way.
+    </p>
+
+    <div class="reference">
+        <strong>Payment Reference</strong><br><br>
+        <span id="reference">Loading...</span>
+    </div>
+
+    <div class="event-info">
+        <h3 id="eventTitle">Loading event...</h3>
+        <p id="eventDate"></p>
+        <p id="eventLocation"></p>
+    </div>
+
+    <a id="gcalLink" class="btn" href="#" target="_blank">📅 Add to Google Calendar</a>
+    <a id="icsLink" class="btn secondary" href="#">⬇ Download .ics File</a>
+
+    <p class="note">
+        Your access code and joining details will be emailed to you a few days
+        before the event — no need to do anything else for now.
+    </p>
+
+</div>
+
+<script>
+
+const WORKER_URL = "https://rapid-hat-720.empowerteachernow.workers.dev";
+
+const params = new URLSearchParams(window.location.search);
+document.getElementById("reference").textContent = params.get("reference") || "Unavailable";
+
+const event = JSON.parse(localStorage.getItem("eventDetails") || "null");
+
+if (event) {
+
+    document.getElementById("eventTitle").textContent = event.title;
+
+    document.getElementById("eventDate").textContent =
+        new Date(event.date).toLocaleString("en-GB", { dateStyle: "full", timeStyle: "short" });
+
+    document.getElementById("eventLocation").textContent = "Location: " + (event.location || "Online");
+
+    document.getElementById("icsLink").href = `${WORKER_URL}/event-ics?id=${event.id}`;
+
+    const start = new Date(event.date);
+    const end = new Date(start.getTime() + 2 * 60 * 60 * 1000);
+
+    const fmt = d => d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+
+    const gcalParams = new URLSearchParams({
+        action: "TEMPLATE",
+        text: event.title,
+        dates: `${fmt(start)}/${fmt(end)}`,
+        details: event.description || "",
+        location: event.location || "Online"
+    });
+
+    document.getElementById("gcalLink").href =
+        `https://www.google.com/calendar/render?${gcalParams.toString()}`;
+
+} else {
+    document.getElementById("eventTitle").textContent = "Event details unavailable";
+}
+
+</script>
+
+</body>
+</html>
