@@ -1781,7 +1781,39 @@ button{
 
 }
 
+/* registration event */
 
+.events-empty{
+    grid-column:1 / -1;
+    text-align:center;
+    background:#fff;
+    color:var(--text-dark);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow);
+    padding:60px 30px;
+}
+
+.events-empty i{
+    font-size:36px;
+    color:var(--primary);
+    margin-bottom:20px;
+}
+
+.events-empty h3{
+    color:var(--dark);
+    font-size:24px;
+    margin-bottom:12px;
+}
+
+.events-empty p{
+    color:var(--text-muted);
+    max-width:420px;
+    margin:0 auto 25px;
+}
+
+.events-empty .btn-primary{
+    display:inline-block;
+}
 /*==================================================
 END OF STYLESHEET
 ==================================================*/
