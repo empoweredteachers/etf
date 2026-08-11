@@ -1567,7 +1567,24 @@ button{
 
 }
 
+document.getElementById("eventModalClose").addEventListener("click", () => {
+    document.getElementById("eventModal").hidden = true;
+});
 
+// Click outside the white box (i.e. on the dark backdrop) closes the modal
+document.getElementById("eventModal").addEventListener("click", (e) => {
+    if (e.target.id === "eventModal") {
+        document.getElementById("eventModal").hidden = true;
+    }
+});
+
+// Escape key closes the modal, but only if it's actually open
+document.addEventListener("keydown", (e) => {
+    const modal = document.getElementById("eventModal");
+    if (e.key === "Escape" && !modal.hidden) {
+        modal.hidden = true;
+    }
+});
 /*==================================================
 21. EVENTS — MOBILE
 ==================================================*/
