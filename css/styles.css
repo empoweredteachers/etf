@@ -830,7 +830,7 @@ img{
 
 
 /*==================================================
-14. COMMUNITY HIGHLIGHTS (photo gallery section)
+14. COMMUNITY HIGHLIGHTS / EVENTS SHOWCASE
 ==================================================*/
 
 .community-highlights{
@@ -839,61 +839,208 @@ img{
 
     color:var(--text-dark);
 
+    overflow:hidden;
+
+}
+
+.community-heading{
+
+    max-width:780px;
+
+    margin:0 auto 50px;
+
+    text-align:center;
+
+}
+
+.community-eyebrow{
+
+    display:inline-block;
+
+    margin-bottom:12px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+
+    color:var(--primary);
+
+}
+
+.community-highlights .section-title{
+
+    margin-bottom:16px;
+
 }
 
 .community-highlights .section-text{
 
+    max-width:700px;
+
+    margin:0 auto;
+
     color:#555;
 
-}
-
-.featured-image{
-
-    text-align:center;
-
-    margin-bottom:50px;
+    line-height:1.7;
 
 }
 
-.featured-image img{
+
+/* Two featured event posters */
+
+.community-highlights .events-showcase{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,minmax(0,1fr));
+
+    gap:30px;
+
+    max-width:1200px;
+
+    margin:0 auto;
+
+}
+
+.community-highlights .event-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:0;
+
+    background:#fff;
+
+    color:var(--text-dark);
+
+    border-radius:22px;
+
+    box-shadow:0 12px 35px rgba(5,47,35,.10);
+
+    transition:
+        transform .45s ease,
+        box-shadow .45s ease;
+
+}
+
+.community-highlights .event-image-wrapper{
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:var(--dark);
+
+}
+
+.community-highlights .event-image{
+
+    display:block;
 
     width:100%;
 
-    max-width:850px;
+    height:auto;
 
-    border-radius:20px;
+    max-width:none;
 
-    margin:auto;
-
-}
-
-.photo-slider{
-
-    display:flex;
-
-    gap:25px;
-
-    overflow-x:auto;
-
-    padding-bottom:20px;
-
-    scroll-snap-type:x mandatory;
+    transition:
+        transform .7s cubic-bezier(.2,.7,.2,1);
 
 }
 
-.photo-slider img{
 
-    flex:0 0 320px;
+/* Gentle hover movement */
 
-    width:320px;
+.community-highlights .event-card:hover{
 
-    height:220px;
+    transform:translateY(-7px);
 
-    object-fit:cover;
+    box-shadow:0 22px 50px rgba(5,47,35,.18);
 
-    border-radius:15px;
+}
 
-    scroll-snap-align:center;
+.community-highlights .event-card:hover .event-image{
+
+    transform:scale(1.035);
+
+}
+
+
+/* Gold accent on hover */
+
+.community-highlights .event-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    right:0;
+
+    bottom:0;
+
+    height:4px;
+
+    background:var(--primary);
+
+    transform:scaleX(0);
+
+    transform-origin:center;
+
+    transition:transform .4s ease;
+
+}
+
+.community-highlights .event-card:hover::after{
+
+    transform:scaleX(1);
+
+}
+
+
+/* Scroll entrance animation */
+
+.community-highlights .event-left{
+
+    opacity:0;
+
+    transform:translateX(-45px);
+
+}
+
+.community-highlights .event-right{
+
+    opacity:0;
+
+    transform:translateX(45px);
+
+}
+
+.community-highlights .event-left.event-visible{
+
+    opacity:1;
+
+    transform:translateX(0);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+
+}
+
+.community-highlights .event-right.event-visible{
+
+    opacity:1;
+
+    transform:translateX(0);
+
+    transition:
+        opacity .8s ease .15s,
+        transform .8s ease .15s;
 
 }
 
@@ -1288,31 +1435,51 @@ nav ul{
 
 }
 
-/* Community Highlights / Gallery */
+/* Community Highlights / Events */
 
-.featured-image img{
+    .community-highlights{
 
-    max-width:100%;
+        padding-left:0;
 
-}
+        padding-right:0;
 
-.photo-slider{
+    }
 
-    gap:15px;
+    .community-highlights .community-heading{
 
-}
+        margin-bottom:35px;
 
-.photo-slider img{
+    }
 
-    flex:0 0 240px;
+    .community-highlights .events-showcase{
 
-    width:240px;
+        grid-template-columns:1fr;
 
-    height:170px;
+        gap:24px;
 
-}
+    }
 
-/* Forms */
+    .community-highlights .event-card{
+
+        border-radius:17px;
+
+    }
+
+    .community-highlights .event-left,
+    .community-highlights .event-right{
+
+        transform:translateY(30px);
+
+    }
+
+    .community-highlights .event-left.event-visible,
+    .community-highlights .event-right.event-visible{
+
+        transform:translateY(0);
+
+    }
+
+    /* Forms */
 
 form{
 
@@ -1590,6 +1757,30 @@ button{
 }
 
 }
+
+/* Respect users who prefer reduced motion */
+
+@media (prefers-reduced-motion:reduce){
+
+    .community-highlights .event-left,
+    .community-highlights .event-right{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+    .community-highlights .event-card,
+    .community-highlights .event-image,
+    .community-highlights .event-card::after{
+
+        transition:none;
+
+    }
+
+}
+
 
 /*==================================================
 END OF STYLESHEET
