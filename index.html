@@ -518,6 +518,7 @@ const EVENTS_WORKER_URL = "https://rapid-hat-720.empowerteachernow.workers.dev";
 let currentEvent = null;
 
 // ---- Load & render events ----
+// ---- Load & render events ----
 async function loadEvents() {
 
     const grid = document.getElementById("eventsGrid");
@@ -528,7 +529,14 @@ async function loadEvents() {
         const data = await res.json();
 
         if (!data.success || data.events.length === 0) {
-            grid.innerHTML = "<p>No upcoming events right now — check back soon!</p>";
+            grid.innerHTML = `
+                <div class="events-empty">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <h3>No Events Scheduled Right Now</h3>
+                    <p>We're planning our next session — join the community and we'll email you the moment registration opens.</p>
+                    <a href="#join" class="btn-primary">Join the Community</a>
+                </div>
+            `;
             return;
         }
 
@@ -587,18 +595,12 @@ document.getElementById("eventModalClose").addEventListener("click", () => {
     document.getElementById("eventModal").hidden = true;
 });
 
-  document.getElementById("eventModalClose").addEventListener("click", () => {
-    document.getElementById("eventModal").hidden = true;
-});
-
-// Click outside the white box (i.e. on the dark backdrop) closes the modal
 document.getElementById("eventModal").addEventListener("click", (e) => {
     if (e.target.id === "eventModal") {
         document.getElementById("eventModal").hidden = true;
     }
 });
 
-// Escape key closes the modal, but only if it's actually open
 document.addEventListener("keydown", (e) => {
     const modal = document.getElementById("eventModal");
     if (e.key === "Escape" && !modal.hidden) {
