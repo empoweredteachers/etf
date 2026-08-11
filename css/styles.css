@@ -1329,7 +1329,266 @@ button{
 }
 
 }
+/*==================================================
+19. EVENTS
+==================================================*/
 
+.events{
+
+    background:var(--dark-alt);
+
+}
+
+.events-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+
+    gap:30px;
+
+    margin-top:50px;
+
+}
+
+.event-card{
+
+    background:#fff;
+
+    color:var(--text-dark);
+
+    border-radius:var(--radius-lg);
+
+    padding:30px;
+
+    box-shadow:var(--shadow);
+
+    transition:var(--transition);
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.event-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.event-date{
+
+    display:block;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+
+    color:var(--primary-hover);
+
+    margin-bottom:14px;
+
+}
+
+.event-card h3{
+
+    color:var(--dark);
+
+    font-size:22px;
+
+    margin-bottom:12px;
+
+}
+
+.event-card p{
+
+    color:var(--text-muted);
+
+    margin-bottom:20px;
+
+    flex-grow:1;
+
+}
+
+.event-price{
+
+    font-weight:800;
+
+    font-size:18px;
+
+    color:var(--dark);
+
+    margin-bottom:20px;
+
+}
+
+.event-card button{
+
+    margin-top:auto;
+
+}
+
+
+/*==================================================
+20. EVENT REGISTRATION MODAL
+==================================================*/
+
+.event-modal{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:1000;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    background:rgba(2,26,19,.75);
+
+    backdrop-filter:blur(4px);
+
+}
+
+/* Browsers apply [hidden]{display:none} without !important, so our
+   display:flex above would otherwise beat it in the cascade. This
+   keeps the modal actually hidden when the "hidden" attribute is set. */
+.event-modal[hidden]{
+
+    display:none !important;
+
+}
+
+.event-modal-content{
+
+    position:relative;
+
+    width:100%;
+
+    max-width:440px;
+
+    background:#fff;
+
+    color:var(--text-dark);
+
+    border-radius:var(--radius-lg);
+
+    box-shadow:var(--shadow);
+
+    padding:45px 35px 35px;
+
+}
+
+.event-modal-close{
+
+    position:absolute;
+
+    top:16px;
+
+    right:16px;
+
+    width:34px;
+
+    height:34px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:var(--light);
+
+    color:var(--dark);
+
+    font-size:20px;
+
+    line-height:1;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+}
+
+.event-modal-close:hover{
+
+    background:var(--primary);
+
+    color:var(--dark);
+
+}
+
+.event-modal-content h3{
+
+    color:var(--dark);
+
+    font-size:26px;
+
+    margin-bottom:8px;
+
+    padding-right:30px;
+
+}
+
+.event-modal-content > p{
+
+    color:var(--text-muted);
+
+    font-size:15px;
+
+    margin-bottom:25px;
+
+}
+
+#eventRegisterForm input{
+
+    margin-bottom:16px;
+
+}
+
+#eventFormMessage{
+
+    text-align:center;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    min-height:20px;
+
+}
+
+
+/*==================================================
+21. EVENTS — MOBILE
+==================================================*/
+
+@media (max-width:768px){
+
+.events-grid{
+
+    grid-template-columns:1fr;
+
+    gap:20px;
+
+}
+
+.event-modal-content{
+
+    padding:40px 25px 30px;
+
+}
+
+}
 
 /*==================================================
 END OF STYLESHEET
