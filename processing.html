@@ -179,9 +179,11 @@ async function verifyPayment(){
 
     try{
 
-
-        // Get products selected before payment
-
+        // Note: the worker no longer needs a "products" list from the
+        // client — it looks up what was actually purchased from
+        // Paystack's own metadata, not from anything sent here. We still
+        // read selectedOffers below for the product-purchase branch, but
+        // it's only used locally, not trusted server-side.
         const selectedProducts = JSON.parse(
 
             localStorage.getItem("selectedOffers") || "[]"
@@ -190,7 +192,7 @@ async function verifyPayment(){
 
 
         console.log(
-            "Purchased products:",
+            "Locally selected products:",
             selectedProducts
         );
 
@@ -211,9 +213,7 @@ async function verifyPayment(){
 
                 body:JSON.stringify({
 
-                    reference: reference,
-
-                    products: selectedProducts
+                    reference: reference
 
                 })
 
@@ -235,6 +235,38 @@ async function verifyPayment(){
         if(data.success){
 
 
+            // ---- EVENT REGISTRATION ----
+            // No download token or purchased products for an event —
+            // just carry the confirmation details through to success.html.
+            if (data.type === "event") {
+
+                localStorage.removeItem("downloadToken");
+                localStorage.removeItem("purchasedProducts");
+
+                localStorage.setItem(
+                    "eventConfirmation",
+                    JSON.stringify({
+                        eventTitle: data.eventTitle,
+                        customer: data.customer,
+                        reference: data.reference
+                    })
+                );
+
+                console.log(
+                    "Event registration confirmed:",
+                    data.eventTitle
+                );
+
+                window.location.href =
+                    "success.html?reference=" + reference + "&type=event";
+
+                return;
+
+            }
+
+
+            // ---- PRODUCT PURCHASE (existing behaviour) ----
+
             // Save secure download token
 
             localStorage.setItem(
@@ -246,13 +278,15 @@ async function verifyPayment(){
             );
 
 
-            // Save purchased products
+            // Save purchased products — prefer what the worker/Paystack
+            // actually recorded over the local copy, since that's the
+            // trusted source of truth.
 
             localStorage.setItem(
 
                 "purchasedProducts",
 
-                JSON.stringify(selectedProducts)
+                JSON.stringify(data.products || selectedProducts)
 
             );
 
