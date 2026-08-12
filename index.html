@@ -581,6 +581,14 @@ function openEventModal(event) {
 
     document.getElementById("eventFormMessage").textContent = "";
     document.getElementById("eventRegisterForm").reset();
+
+    // This modal is shared across every event card. Without resetting the
+    // submit button here, a previous successful registration's "Registered ✓"
+    // (disabled) state carries over onto the next event you open.
+    const submitBtn = document.getElementById("eventSubmitBtn");
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Register";
+
     document.getElementById("eventModal").hidden = false;
 }
 
