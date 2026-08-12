@@ -512,7 +512,6 @@ const EVENTS_WORKER_URL = "https://rapid-hat-720.empowerteachernow.workers.dev";
 let currentEvent = null;
 
 // ---- Load & render events ----
-// ---- Load & render events ----
 async function loadEvents() {
 
     const grid = document.getElementById("eventsGrid");
@@ -999,61 +998,6 @@ if (
     });
 
 });
-  
-  /*Image Scroll*/
-  const slider = document.querySelector(".photo-slider");
-
-// Duplicate all images once
-slider.innerHTML += slider.innerHTML;
-
-let speed = 1;
-let timer;
-
-function startScrolling() {
-
-    timer = setInterval(() => {
-
-        slider.scrollLeft += speed;
-
-        // Reset when we've scrolled through the first set
-        if (slider.scrollLeft >= slider.scrollWidth / 2) {
-
-            slider.scrollLeft = 0;
-
-        }
-
-    }, 20);
-
-}
-
-function stopScrolling() {
-
-    clearInterval(timer);
-
-}
-
-slider.addEventListener("mouseenter", stopScrolling);
-
-slider.addEventListener("mouseleave", startScrolling);
-
-startScrolling();
-  
-
-  /* effect on the featured image */
-
-  /*Event regi script*/
-
-  if (!data.success || data.events.length === 0) {
-    grid.innerHTML = `
-        <div class="events-empty">
-            <i class="fa-solid fa-calendar-days"></i>
-            <h3>No Events Scheduled Right Now</h3>
-            <p>We're planning our next session — join the community and we'll email you the moment registration opens.</p>
-            <a href="#join" class="btn-primary">Join the Community</a>
-        </div>
-    `;
-    return;
-}
 
 </script>
 
