@@ -1041,49 +1041,6 @@ startScrolling();
 
   /* effect on the featured image */
 
-document.addEventListener("DOMContentLoaded", function () {
-
-    const eventCards =
-        document.querySelectorAll(".event-card");
-
-
-    const eventObserver =
-        new IntersectionObserver(
-
-            function (entries, observer) {
-
-                entries.forEach(function (entry) {
-
-                    if (entry.isIntersecting) {
-
-                        entry.target.classList.add(
-                            "event-visible"
-                        );
-
-                        observer.unobserve(
-                            entry.target
-                        );
-
-                    }
-
-                });
-
-            },
-
-            {
-                threshold: 0.15
-            }
-
-        );
-
-
-    eventCards.forEach(function (card) {
-
-        eventObserver.observe(card);
-
-    });
-
-});
   /*Event regi script*/
 
   if (!data.success || data.events.length === 0) {
