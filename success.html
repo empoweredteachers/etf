@@ -247,21 +247,15 @@ EMPOWERED TEACHERS FORUM
 
 </div>
 
-<h1>
+<h1 id="heading">
 
 Payment Successful
 
 </h1>
 
-<p class="subtitle">
+<p class="subtitle" id="subtitle">
 
-Thank you for purchasing the
-
-<strong>Global Educator's Job Search Handbook.</strong>
-
-<br><br>
-
-Your payment has been verified successfully.
+Loading your confirmation...
 
 </p>
 
@@ -279,26 +273,8 @@ Loading...
 
 </div>
 
-<div class="product">
-
-<h3>
-
-Your Purchase Includes
-
-</h3>
-
-<ul>
-
-<li>✔ Global Educator's Job Search Handbook (PDF)</li>
-
-<li>✔ Instant Digital Access</li>
-
-<li>✔ Future Handbook Updates</li>
-
-<li>✔ Bonus Career Resources</li>
-
-</ul>
-
+<div class="product" id="purchaseBox">
+<!-- populated by JS: purchase summary (products) or registration summary (event) -->
 </div>
 
 <div id="downloads"></div>
@@ -310,26 +286,8 @@ Join ETF WhatsApp Community
 
 </a>
 
-<div class="next">
-
-<h3>
-
-What's Next?
-
-</h3>
-
-<ul>
-
-<li>Download and save your handbook.</li>
-
-<li>Check your email for your purchase confirmation.</li>
-
-<li>Join the ETF community.</li>
-
-<li>Start applying the strategies immediately.</li>
-
-</ul>
-
+<div class="next" id="nextSteps">
+<!-- populated by JS -->
 </div>
 
 <div class="footer">
@@ -347,17 +305,12 @@ support@empowerteacher.com
 const params = new URLSearchParams(window.location.search);
 
 const reference = params.get("reference");
+const type = params.get("type"); // "event" for event registrations, absent/other for product purchases
 
 document.getElementById("reference").textContent = reference || "Unavailable";
 
 const workerURL =
 "https://rapid-hat-720.empowerteachernow.workers.dev";
-
-const token = localStorage.getItem("downloadToken");
-
-const products = JSON.parse(
-    localStorage.getItem("purchasedProducts") || "[]"
-);
 
 const productNames = {
     handbook: "Global Educator's Job Search Handbook",
@@ -365,38 +318,153 @@ const productNames = {
     timeless: "Timeless Job Search Strategies"
 };
 
+const heading = document.getElementById("heading");
+const subtitle = document.getElementById("subtitle");
+const purchaseBox = document.getElementById("purchaseBox");
 const downloads = document.getElementById("downloads");
+const nextSteps = document.getElementById("nextSteps");
 
-if (!token || products.length === 0) {
+// ==========================================================
+// EVENT REGISTRATION
+// ==========================================================
+if (type === "event") {
 
-    downloads.innerHTML = `
-        <p>
-        No downloadable products found.
-        Please contact support.
-        </p>
+    let confirmation = null;
+
+    try {
+        confirmation = JSON.parse(localStorage.getItem("eventConfirmation") || "null");
+    } catch (e) {
+        confirmation = null;
+    }
+
+    const eventTitle = confirmation?.eventTitle || "your event";
+
+    heading.textContent = "You're Registered!";
+
+    subtitle.innerHTML = `
+        Thank you for registering for
+        <strong>${eventTitle}.</strong>
+        <br><br>
+        Your spot is confirmed.
+    `;
+
+    purchaseBox.innerHTML = `
+        <h3>Registration Details</h3>
+        <ul>
+            <li>✔ ${eventTitle}</li>
+            <li>✔ Confirmation sent to your email</li>
+            <li>✔ Access code will be emailed a few days before the event</li>
+        </ul>
+    `;
+
+    // No downloads for an event — leave that section empty.
+    downloads.innerHTML = "";
+
+    nextSteps.innerHTML = `
+        <h3>What's Next?</h3>
+        <ul>
+            <li>Check your email for your registration confirmation.</li>
+            <li>Watch your inbox for your access code closer to the event date.</li>
+            <li>Join the ETF community to connect with other attendees.</li>
+            <li>Add the event date to your calendar so you don't miss it.</li>
+        </ul>
     `;
 
 } else {
 
-    products.forEach(product => {
+    // ==========================================================
+    // PRODUCT PURCHASE
+    // ==========================================================
 
-        const button = document.createElement("a");
+    const token = localStorage.getItem("downloadToken");
 
-        button.className = "btn";
+    const products = JSON.parse(
+        localStorage.getItem("purchasedProducts") || "[]"
+    );
 
-        button.href =
-            `${workerURL}/download?token=${token}&product=${product}`;
+    const purchasedNames = products
+        .map((id) => productNames[id])
+        .filter(Boolean);
 
-        button.textContent =
-            "📘 Download " + productNames[product];
+    heading.textContent = "Payment Successful";
 
-        button.target = "_blank";
+    if (purchasedNames.length === 1) {
 
-        downloads.appendChild(button);
+        subtitle.innerHTML = `
+            Thank you for purchasing the
+            <strong>${purchasedNames[0]}.</strong>
+            <br><br>
+            Your payment has been verified successfully.
+        `;
 
-        downloads.appendChild(document.createElement("br"));
+    } else if (purchasedNames.length > 1) {
 
-    });
+        subtitle.innerHTML = `
+            Thank you for your purchase of
+            <strong>${purchasedNames.length} resources.</strong>
+            <br><br>
+            Your payment has been verified successfully.
+        `;
+
+    } else {
+
+        subtitle.innerHTML = `
+            Your payment has been verified successfully.
+        `;
+
+    }
+
+    purchaseBox.innerHTML = `
+        <h3>Your Purchase Includes</h3>
+        <ul>
+            ${purchasedNames.map((name) => `<li>✔ ${name} (PDF)</li>`).join("")}
+            <li>✔ Instant Digital Access</li>
+            <li>✔ Future Updates</li>
+        </ul>
+    `;
+
+    if (!token || products.length === 0) {
+
+        downloads.innerHTML = `
+            <p>
+            No downloadable products found.
+            Please contact support.
+            </p>
+        `;
+
+    } else {
+
+        products.forEach(product => {
+
+            const button = document.createElement("a");
+
+            button.className = "btn";
+
+            button.href =
+                `${workerURL}/download?token=${token}&product=${product}`;
+
+            button.textContent =
+                "📘 Download " + (productNames[product] || product);
+
+            button.target = "_blank";
+
+            downloads.appendChild(button);
+
+            downloads.appendChild(document.createElement("br"));
+
+        });
+
+    }
+
+    nextSteps.innerHTML = `
+        <h3>What's Next?</h3>
+        <ul>
+            <li>Download and save your resource(s).</li>
+            <li>Check your email for your purchase confirmation.</li>
+            <li>Join the ETF community.</li>
+            <li>Start applying the strategies immediately.</li>
+        </ul>
+    `;
 
 }
 
