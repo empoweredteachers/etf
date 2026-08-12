@@ -1814,6 +1814,76 @@ button{
 .events-empty .btn-primary{
     display:inline-block;
 }
+/* ==================================================
+   FEATURED COMMUNITY EVENTS
+   ================================================== */
+
+.community-highlights .events-showcase {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px;
+    width: 100%;
+    margin-top: 45px;
+}
+
+.community-highlights .featured-event {
+    width: 100%;
+    min-width: 0;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-shadow: none;
+}
+
+.community-highlights .featured-event-image {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 22px;
+    background: #f5f5f5;
+    line-height: 0;
+}
+
+.community-highlights .featured-event-image picture {
+    display: block;
+    width: 100%;
+}
+
+.community-highlights .featured-event-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    object-fit: contain;
+    transition: transform 0.5s ease;
+}
+
+/* Subtle premium hover effect */
+
+.community-highlights .featured-event:hover img {
+    transform: scale(1.025);
+}
+
+/* ==================================================
+   FEATURED EVENTS — MOBILE
+   ================================================== */
+
+@media (max-width: 768px) {
+
+    .community-highlights .events-showcase {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        margin-top: 30px;
+    }
+
+    .community-highlights .featured-event-image {
+        border-radius: 16px;
+    }
+
+}
 /*==================================================
 END OF STYLESHEET
 ==================================================*/
