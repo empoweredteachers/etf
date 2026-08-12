@@ -623,17 +623,11 @@ img{
    to unstyled block elements. */
 
 .resource-card{
-
     display:grid;
-
-    grid-template-columns:350px 1fr;
-
-    gap:70px;
-
+    grid-template-columns:300px minmax(0, 1fr);
+    gap:35px;
     align-items:center;
-
     width:100%;
-
 }
 
 .resource-card.reverse{
@@ -663,16 +657,13 @@ img{
     align-items:center;
 
 }
-
 .resource-image img{
-
     width:100%;
-
-    max-width:350px;
-
+    max-width:300px;
     height:auto;
-
 }
+
+
 
 .resource-content{
 
@@ -698,11 +689,12 @@ img{
 
 .resource-content h3{
 
-    font-size:38px;
+    font-size:34px;
 
     color:var(--dark);
 
-    margin-bottom:20px;
+    margin-bottom:16px;
+    line-height:1.15;
 
 }
 
@@ -710,10 +702,10 @@ img{
 
     color:#444;
 
-    font-size:19px;
+    font-size:17px;
 
-    margin-bottom:20px;
-
+    margin-bottom:16px;
+    line-height:1.65;
 }
 
 .resource-content ul{
