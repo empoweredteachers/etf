@@ -546,18 +546,26 @@ async function loadEvents() {
                 ? `${event.currency} ${event.price.toLocaleString()}`
                 : "Free";
 
+            const hasEnded = new Date(event.date).getTime() < Date.now();
+
             const card = document.createElement("div");
-            card.className = "event-card";
+            card.className = hasEnded ? "event-card event-card-ended" : "event-card";
 
             card.innerHTML = `
                 <span class="event-date">${dateLabel}</span>
                 <h3>${event.title}</h3>
                 <p>${event.description || ""}</p>
                 <div class="event-price">${priceLabel}</div>
-                <button type="button" data-id="${event.id}">Register</button>
+                ${
+                    hasEnded
+                        ? `<button type="button" class="event-ended-btn" disabled>Event Ended</button>`
+                        : `<button type="button" data-id="${event.id}">Register</button>`
+                }
             `;
 
-            card.querySelector("button").addEventListener("click", () => openEventModal(event));
+            if (!hasEnded) {
+                card.querySelector("button").addEventListener("click", () => openEventModal(event));
+            }
 
             grid.appendChild(card);
 
