@@ -474,19 +474,29 @@ img{
 
     text-align:center;
 
+    margin-bottom:8px;
+
 }
 
 .product-image img{
 
     width:auto;
 
-    height:300px;
+    height:220px;
 
     max-width:100%;
 
     object-fit:contain;
 
     margin:0 auto;
+
+}
+
+.card h3{
+
+    margin-top:0;
+
+    margin-bottom:10px;
 
 }
 
@@ -624,15 +634,15 @@ img{
 
 .resource-card{
     display:grid;
-    grid-template-columns:300px minmax(0, 1fr);
-    gap:35px;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:60px;
     align-items:center;
     width:100%;
 }
 
 .resource-card.reverse{
 
-    grid-template-columns:1fr 350px;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
 
 }
 
