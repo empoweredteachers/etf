@@ -598,147 +598,205 @@ img{
 ==================================================*/
 
 .resources{
-
     background:var(--light);
-
     color:#333;
+}
 
+/* Tighter vertical spacing specifically for Resources */
+.resources .container{
+    padding-top:50px;
+    padding-bottom:50px;
 }
 
 .resources h2{
-
     text-align:center;
-
     font-size:42px;
-
-    margin-bottom:20px;
-
+    margin-bottom:12px;
+    line-height:1.15;
 }
 
+.resources .section-text{
+    text-align:center;
+    max-width:700px;
+    margin:0 auto 35px;
+    color:#555;
+    line-height:1.6;
+}
+
+/* Resource cards */
 .resources-grid{
-
     display:flex;
-
     flex-direction:column;
-
-    gap:100px;
-
+    gap:55px;
     width:100%;
-
 }
 
-/* NOTE: the HTML markup uses class="resource-card" (and
-   "resource-card reverse" for the second entry) — these rules
-   must match those class names exactly or the cards fall back
-   to unstyled block elements. */
-
+/* Individual resource */
 .resource-card{
     display:grid;
     grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-    gap:60px;
+    gap:45px;
     align-items:center;
     width:100%;
 }
 
+/* Reverse second resource */
 .resource-card.reverse{
-
     grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-
 }
 
 .resource-card.reverse .resource-image{
-
     order:2;
-
 }
 
 .resource-card.reverse .resource-content{
-
     order:1;
-
 }
 
+/* Resource image */
 .resource-image{
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
 }
+
 .resource-image img{
+    display:block;
     width:100%;
     max-width:300px;
     height:auto;
 }
 
-
-
+/* Resource content */
 .resource-content{
-
     width:100%;
-
 }
 
 .free-badge{
-
     display:inline-block;
-
-    margin-bottom:15px;
-
+    margin-bottom:10px;
     font-size:13px;
-
     letter-spacing:1px;
-
     font-weight:700;
-
     color:#666;
-
 }
 
 .resource-content h3{
-
-    font-size:34px;
-
+    font-size:32px;
     color:var(--dark);
-
-    margin-bottom:16px;
-    line-height:1.15;
-
+    margin-bottom:12px;
+    line-height:1.2;
 }
 
 .resource-content p{
-
     color:#444;
-
-    font-size:17px;
-
-    margin-bottom:16px;
-    line-height:1.65;
+    font-size:16px;
+    margin-bottom:12px;
+    line-height:1.55;
 }
 
 .resource-content ul{
-
-    margin:25px 0;
-
+    margin:15px 0 20px;
     padding-left:20px;
-
 }
 
 .resource-content li{
-
-    margin-bottom:12px;
-
+    margin-bottom:6px;
+    line-height:1.5;
 }
 
 .resource-content .btn-primary{
-
-    margin-top:20px;
-
+    margin-top:10px;
 }
 
 
+/*==================================================
+11A. RESOURCES — MOBILE
+==================================================*/
+
+@media (max-width:768px){
+
+    .resources .container{
+        padding-top:40px;
+        padding-bottom:40px;
+    }
+
+    .resources h2{
+        font-size:32px;
+        margin-bottom:10px;
+    }
+
+    .resources .section-text{
+        margin-bottom:30px;
+        font-size:16px;
+    }
+
+    .resources-grid{
+        gap:50px;
+    }
+
+    .resource-card{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+        gap:20px;
+        width:100%;
+    }
+
+    /* Always show image first on mobile */
+    .resource-card.reverse .resource-image{
+        order:0;
+    }
+
+    .resource-card.reverse .resource-content{
+        order:0;
+    }
+
+    .resource-image{
+        width:100%;
+    }
+
+    .resource-image img{
+        width:100%;
+        max-width:280px;
+    }
+
+    .resource-content{
+        width:100%;
+        max-width:100%;
+        margin:0;
+        padding:0;
+    }
+
+    .resource-content h3{
+        font-size:27px;
+        margin-bottom:10px;
+    }
+
+    .resource-content p{
+        font-size:16px;
+        line-height:1.55;
+    }
+
+    .resource-content ul{
+        display:inline-block;
+        text-align:left;
+        margin:15px auto 20px;
+    }
+
+    .resource-content li{
+        margin-bottom:5px;
+    }
+
+    .resource-content .btn-primary{
+        display:block;
+        width:100%;
+        max-width:320px;
+        margin:15px auto 0;
+    }
+
+}
 /*==================================================
 12. COMMUNITY / JOIN SECTION
 ==================================================*/
