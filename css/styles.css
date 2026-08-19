@@ -449,40 +449,22 @@ img{
 
 
 /*==================================================
-10. PRODUCTS
+   PRODUCTS — IMAGE SIZE
 ==================================================*/
 
-.products{
-
-    background:var(--light);
-
-    color:var(--text-dark);
-
-}
-
-.products .cards{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-
-    gap:30px;
-
-}
-
-.product-image{
+.products .product-image{
 
     text-align:center;
 
-    margin-bottom:8px;
+    margin-bottom:0;
 
 }
 
-.product-image img{
+.products .product-image img{
 
     width:auto;
 
-    height:220px;
+    height:280px;
 
     max-width:100%;
 
@@ -492,312 +474,561 @@ img{
 
 }
 
-.card h3{
 
-    margin-top:0;
+/* Reduce card padding so the larger image has room */
 
-    margin-bottom:10px;
+.products .card{
 
-}
-
-.select-toggle{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    margin-top:20px;
-
-    padding:14px 18px;
-
-    border:2px solid #ddd;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-    transition:var(--transition);
-
-    font-weight:700;
-
-    color:var(--dark);
-
-}
-
-.select-toggle:hover{
-
-    border-color:var(--primary);
-
-}
-
-.select-toggle input{
-
-    width:20px;
-
-    height:20px;
-
-    accent-color:var(--primary);
-
-    flex:0 0 auto;
-
-}
-
-.card:has(.offer-checkbox:checked) .select-toggle{
-
-    border-color:var(--primary);
-
-    background:#fdf8ec;
-
-}
-
-.checkout-bar{
-
-    position:sticky;
-
-    bottom:20px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:20px;
-
-    margin-top:40px;
-
-    padding:20px 25px;
-
-    background:var(--dark);
-
-    color:#fff;
-
-    border-radius:var(--radius-lg);
-
-    box-shadow:var(--shadow);
-
-}
-
-.checkout-bar #checkoutSummary{
-
-    font-weight:600;
-
-}
-
-.checkout-bar button{
-
-    white-space:nowrap;
+    padding:22px;
 
 }
 
 
+/* Mobile */
+
+@media (max-width:768px){
+
+    .products .product-image img{
+
+        height:260px;
+
+    }
+
+    .products .card{
+
+        padding:20px;
+
+    }
+
+}
 /*==================================================
 11. RESOURCES
 ==================================================*/
 
 .resources{
     background:var(--light);
-    color:#333;
+    color:var(--text-dark);
 }
 
-/* Tighter vertical spacing specifically for Resources */
+
+/*--------------------------------------------------
+   RESOURCES CONTAINER
+--------------------------------------------------*/
+
 .resources .container{
-    padding-top:50px;
-    padding-bottom:50px;
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+
+    /* Reduced vertical padding */
+    padding:45px 0;
 }
+
+
+/*--------------------------------------------------
+   SECTION HEADING
+--------------------------------------------------*/
 
 .resources h2{
     text-align:center;
+
     font-size:42px;
-    margin-bottom:12px;
     line-height:1.15;
+
+    color:var(--dark);
+
+    margin:0 0 10px;
 }
+
+
+/* Introductory text */
 
 .resources .section-text{
     text-align:center;
+
     max-width:700px;
+
     margin:0 auto 35px;
+
     color:#555;
+
+    font-size:17px;
+
     line-height:1.6;
 }
 
-/* Resource cards */
+
+/*--------------------------------------------------
+   RESOURCE GRID
+--------------------------------------------------*/
+
 .resources-grid{
+
     display:flex;
+
     flex-direction:column;
+
+    width:100%;
+
+    /* Space between Resource 1 and Resource 2 */
     gap:55px;
-    width:100%;
+
 }
 
-/* Individual resource */
+
+/*--------------------------------------------------
+   RESOURCE CARD
+--------------------------------------------------*/
+
 .resource-card{
+
     display:grid;
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-    gap:45px;
+
+    /*
+       Give the image enough room while keeping
+       the text slightly wider.
+    */
+    grid-template-columns:45% 55%;
+
     align-items:center;
+
     width:100%;
+
+    gap:20px;
+
 }
 
-/* Reverse second resource */
+
+/* Reverse the second resource */
+
 .resource-card.reverse{
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+
+    grid-template-columns:45% 55%;
+
 }
+
+
+/*--------------------------------------------------
+   RESOURCE IMAGE
+--------------------------------------------------*/
+
+.resource-image{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+/*
+   Larger images so they actually occupy
+   the available space.
+*/
+
+.resource-image img{
+
+    display:block;
+
+    width:100%;
+
+    max-width:420px;
+
+    height:auto;
+
+    margin:auto;
+
+    object-fit:contain;
+
+}
+
+
+/*--------------------------------------------------
+   REVERSE RESOURCE
+--------------------------------------------------*/
 
 .resource-card.reverse .resource-image{
+
     order:2;
+
 }
 
 .resource-card.reverse .resource-content{
+
     order:1;
+
 }
 
-/* Resource image */
-.resource-image{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
 
-.resource-image img{
-    display:block;
-    width:100%;
-    max-width:300px;
-    height:auto;
-}
+/*--------------------------------------------------
+   RESOURCE CONTENT
+--------------------------------------------------*/
 
-/* Resource content */
 .resource-content{
+
     width:100%;
+
+    padding:0 10px;
+
 }
+
+
+/* Free download badge */
 
 .free-badge{
+
     display:inline-block;
-    margin-bottom:10px;
+
+    margin-bottom:8px;
+
     font-size:13px;
+
     letter-spacing:1px;
+
     font-weight:700;
+
     color:#666;
+
 }
+
+
+/* Resource title */
 
 .resource-content h3{
+
     font-size:32px;
-    color:var(--dark);
-    margin-bottom:12px;
+
     line-height:1.2;
+
+    color:var(--dark);
+
+    margin:0 0 12px;
+
 }
+
+
+/* Description */
 
 .resource-content p{
+
     color:#444;
+
     font-size:16px;
-    margin-bottom:12px;
-    line-height:1.55;
+
+    line-height:1.6;
+
+    margin:0 0 12px;
+
 }
 
+
+/*--------------------------------------------------
+   RESOURCE FEATURES
+--------------------------------------------------*/
+
 .resource-content ul{
-    margin:15px 0 20px;
+
+    margin:12px 0 18px;
+
     padding-left:20px;
+
 }
 
 .resource-content li{
-    margin-bottom:6px;
+
+    margin-bottom:5px;
+
+    color:#333;
+
     line-height:1.5;
+
 }
 
+
+/*--------------------------------------------------
+   RESOURCE BUTTON
+--------------------------------------------------*/
+
 .resource-content .btn-primary{
-    margin-top:10px;
+
+    display:inline-block;
+
+    margin-top:5px;
+
 }
 
 
 /*==================================================
-11A. RESOURCES — MOBILE
+   RESOURCES — TABLET
+==================================================*/
+
+@media (max-width:900px){
+
+    .resource-card{
+
+        grid-template-columns:42% 58%;
+
+        gap:20px;
+
+    }
+
+    .resource-card.reverse{
+
+        grid-template-columns:42% 58%;
+
+    }
+
+    .resource-image img{
+
+        max-width:360px;
+
+    }
+
+    .resource-content h3{
+
+        font-size:29px;
+
+    }
+
+}
+
+
+/*==================================================
+   RESOURCES — MOBILE
 ==================================================*/
 
 @media (max-width:768px){
 
     .resources .container{
-        padding-top:40px;
-        padding-bottom:40px;
+
+        width:92%;
+
+        padding:40px 0;
+
     }
+
+
+    /* Heading */
 
     .resources h2{
+
         font-size:32px;
+
         margin-bottom:10px;
+
     }
+
 
     .resources .section-text{
-        margin-bottom:30px;
+
         font-size:16px;
+
+        margin-bottom:30px;
+
+        line-height:1.6;
+
     }
+
+
+    /* Resource spacing */
 
     .resources-grid{
-        gap:50px;
+
+        gap:55px;
+
     }
+
+
+    /* Stack resources */
 
     .resource-card{
+
         display:flex;
+
         flex-direction:column;
+
         align-items:center;
-        text-align:center;
-        gap:20px;
+
         width:100%;
+
+        gap:20px;
+
+        text-align:center;
+
     }
 
-    /* Always show image first on mobile */
+
+    /* Always put image first */
+
     .resource-card.reverse .resource-image{
+
         order:0;
+
     }
 
     .resource-card.reverse .resource-content{
+
         order:0;
+
     }
 
+
+    /* Image */
+
     .resource-image{
+
         width:100%;
+
     }
 
     .resource-image img{
+
         width:100%;
-        max-width:280px;
+
+        max-width:340px;
+
+        height:auto;
+
+        margin:auto;
+
     }
+
+
+    /* Content */
 
     .resource-content{
+
         width:100%;
-        max-width:100%;
-        margin:0;
+
         padding:0;
+
     }
+
+
+    .free-badge{
+
+        margin-bottom:8px;
+
+    }
+
 
     .resource-content h3{
+
         font-size:27px;
+
+        line-height:1.2;
+
         margin-bottom:10px;
+
     }
+
 
     .resource-content p{
+
         font-size:16px;
+
         line-height:1.55;
+
+        margin-bottom:10px;
+
     }
 
+
+    /* Feature list */
+
     .resource-content ul{
+
         display:inline-block;
+
         text-align:left;
-        margin:15px auto 20px;
+
+        margin:12px auto 18px;
+
+        padding-left:20px;
+
     }
 
     .resource-content li{
+
         margin-bottom:5px;
+
     }
 
+
+    /* Button */
+
     .resource-content .btn-primary{
+
         display:block;
+
         width:100%;
+
         max-width:320px;
-        margin:15px auto 0;
+
+        margin:10px auto 0;
+
     }
 
 }
+
+
 /*==================================================
+   RESOURCES — SMALL PHONES
+==================================================*/
+
+@media (max-width:480px){
+
+    .resources .container{
+
+        width:94%;
+
+        padding:35px 0;
+
+    }
+
+    .resources h2{
+
+        font-size:28px;
+
+    }
+
+    .resources .section-text{
+
+        font-size:15px;
+
+        margin-bottom:25px;
+
+    }
+
+    .resources-grid{
+
+        gap:45px;
+
+    }
+
+    .resource-image img{
+
+        max-width:310px;
+
+    }
+
+    .resource-content h3{
+
+        font-size:25px;
+
+    }
+
+    .resource-content p{
+
+        font-size:15px;
+
+    }
+
+}/*==================================================
 12. COMMUNITY / JOIN SECTION
 ==================================================*/
 
