@@ -2345,10 +2345,9 @@ FEATURED EVENTS — MOBILE
 
 .team-photo{
   position:relative;
-  flex:0 0 auto;
+  flex:0 0 88px;
   width:88px;
   height:88px;
-  aspect-ratio:1/1;
   border-radius:50%;
   overflow:hidden;
   border:3px solid var(--primary);
@@ -2356,16 +2355,12 @@ FEATURED EVENTS — MOBILE
 }
 
 .team-photo img{
-  position:absolute;
-  top:0;
-  left:0;
   width:100%;
   height:100%;
+  display:block;
   object-fit:cover;
   object-position:center;
   border-radius:50%;
-  clip-path:circle(50%);
-  display:block;
 }
 
 .team-info h3{
