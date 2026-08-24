@@ -2274,7 +2274,27 @@ button{
     .community-highlights .featured-event-image {
         border-radius: 16px;
     }
+/*==================================================
+TEAM / ACTIVITIES TEASER
+(sits after Testimonials, links out to activities.html)
+==================================================*/
 
+.team-teaser{
+  background:var(--dark-alt);
+  text-align:center;
+}
+
+.team-teaser .section-title{
+  margin-bottom:16px;
+}
+
+.team-teaser .section-text{
+  margin-bottom:35px;
+}
+
+.team-teaser .btn-primary{
+  display:inline-block;
+}
 }
 /*==================================================
 END OF STYLESHEET
