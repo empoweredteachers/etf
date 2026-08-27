@@ -211,11 +211,10 @@ src="https://www.facebook.com/tr?id=1065874902632784&ev=PageView&noscript=1"/>
                         <li>✔ Personal readiness assessment</li>
                     </ul>
 
-                    <a href="#join"
+                    <a href="#"
                        class="btn-primary"
-                       onclick="localStorage.removeItem('selectedOffers');
-                        setOffer('free-checklist');">
-                      
+                       onclick="handleFreeResourceClick('free-checklist'); return false;">
+
                         Download Free Checklist
                     </a>
 
@@ -257,12 +256,9 @@ src="https://www.facebook.com/tr?id=1065874902632784&ev=PageView&noscript=1"/>
                         <li>✔ Interview readiness score</li>
                     </ul>
 
-                    <a href="#join"
+                    <a href="#"
                        class="btn-primary"
-                      onclick="
-                            localStorage.removeItem('selectedOffers');
-                            setOffer('free-ai-cv');
-                            ">
+                       onclick="handleFreeResourceClick('free-ai-cv'); return false;">
                         Download AI CV Prompt
                     </a>
 
@@ -786,6 +782,25 @@ loadEvents();
     localStorage.setItem("selectedOffer", offer);
 }
 
+// ===== Free resource buttons: skip the join form for returning visitors =====
+// If this browser already has a saved name/email (i.e. they've joined
+// before), send them straight to the resource instead of re-showing the
+// join form. First-time visitors still go through the form as before.
+function handleFreeResourceClick(offer) {
+
+    localStorage.removeItem('selectedOffers');
+    setOffer(offer);
+
+    const name = localStorage.getItem('name');
+    const email = localStorage.getItem('email');
+
+    if (name && email) {
+        window.location.href = `thankyounew.html?offer=${offer}`;
+    } else {
+        document.getElementById('join').scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
 
 // ===== Multi-select product checkout (Handbook / Corporate / Timeless) =====
 
@@ -912,9 +927,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+// ===== Join form: show a "welcome back" message instead of the form
+// for visitors who have already registered on this browser =====
+document.addEventListener("DOMContentLoaded", () => {
+
+    const savedName = localStorage.getItem("name");
+    const savedEmail = localStorage.getItem("email");
+
+    if (savedName && savedEmail) {
+
+        const joinContainer = document.querySelector("#join .container");
+
+        joinContainer.innerHTML = `
+            <div class="community-text">
+                <h2>Welcome back, ${savedName}! 👋</h2>
+                <p>
+                    You're already part of the Empowered Teachers Forum.
+                    Browse our free resources above, or check out our upcoming events.
+                </p>
+                <a href="#resources" class="btn-primary">Browse Free Resources</a>
+            </div>
+        `;
+
+    }
+
+});
+
 document.addEventListener("DOMContentLoaded", () => {
 
     const form = document.getElementById("joinForm");
+
+    // Form may already have been replaced by the "welcome back" message
+    // above (for returning visitors) — nothing to wire up in that case.
+    if (!form) return;
+
     const message = document.getElementById("message");
     const submitBtn = document.getElementById("submitButton");
 
@@ -1003,7 +1049,7 @@ if (
 ) {
     window.location.href = "checkout.html";
 } else {
-    window.location.href = `/thankyounew.html?offer=${offer}`;
+    window.location.href = `thankyounew.html?offer=${offer}`;
 }
 
                 }, 2000);
