@@ -2487,6 +2487,69 @@ FEATURED EVENTS — MOBILE
   .activity-join-cta{
     padding:45px 20px;
   }
+    /* ================= LOCATION / MAP ================= */
+
+.location-section {
+    padding: 60px 0;
+    background: #f8f9f7;
+}
+
+.location-content {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.location-eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #c9a227;
+    margin-bottom: 10px;
+}
+
+.location-text h2 {
+    margin-bottom: 15px;
+}
+
+.location-text p {
+    line-height: 1.7;
+}
+
+.location-text i {
+    color: #c9a227;
+    margin-right: 8px;
+}
+
+.location-map {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.10);
+}
+
+.location-map iframe {
+    display: block;
+    width: 100%;
+    height: 280px;
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .location-content {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .location-map iframe {
+        height: 240px;
+    }
+
+}
 }
 
 /*==================================================
