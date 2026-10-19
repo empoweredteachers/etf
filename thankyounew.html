@@ -75,27 +75,15 @@ transition:.3s;
 .btn:hover{
 background:#0b463b;
 }
+.btn.disabled{
+background:#9aa9a4;
+pointer-events:none;
+}
 .redirect-note{
 margin-top:16px;
+margin-bottom:0 !important;
 font-size:13px;
 color:#888;
-}
-.next{
-margin-top:50px;
-padding-top:35px;
-border-top:1px solid #eee;
-}
-.next h3{
-margin-bottom:20px;
-}
-.offer{
-background:#faf8f1;
-padding:25px;
-border-radius:12px;
-margin-top:20px;
-}
-.offer strong{
-color:#0F5B4C;
 }
 .footer{
 margin-top:40px;
@@ -108,20 +96,16 @@ color:#666;
 <div class="card">
 <div class="icon">🎉</div>
 <h1>You're In!</h1>
-<p class="subtitle">
+<p class="subtitle" id="subtitle">
 Thank you for joining the Empowered Teachers Forum.
 Your free resource is ready.
 </p>
 <div class="resource">
-<img id="resourceImage" src="" alt="Free Resource">
+<img id="resourceImage" src="/images/logo1.png" alt="Free Resource">
 <h2 id="resourceTitle"></h2>
 <p id="resourceDescription"></p>
-<a id="downloadButton"
-   class="btn"
-   href="#"
-   download>
-    Download Resource
-</a>
+<!-- No "download" attribute here: it is added by the script only for real PDF files. -->
+<a id="downloadButton" class="btn" href="/#resources">Download Resource</a>
 <p class="redirect-note" id="redirectNote"></p>
 </div>
 <div class="footer">
@@ -129,53 +113,78 @@ Follow Empowered Teachers Forum for more career tips and international teaching 
 </div>
 </div>
 <script>
-const resources={
-"free-checklist":{
-title:"International Teacher Readiness Checklist",
-description:"Assess whether you're ready to apply for international teaching opportunities.",
-image:"images/ChecklistFreee.png",
-file:"downloads/ReadinessChecklist.pdf"
-},
-"free-ai-cv":{
-title:"AI CV Review Prompt",
-description:"Review your CV like an international school recruiter using AI.",
-image:"images/aicv.png",
-file:"downloads/AICVReview.pdf"
-},
-  
-"community":{
-title:"Welcome to the Community",
-description:"Explore our growing collection of free resources designed for teachers.",
-image:"images/logo1.png",
-file:"#"
-}
+// "file" is the PDF to download. A resource with no file (the community
+// fallback) gets a normal link instead of a download button.
+const resources = {
+  "free-checklist": {
+    title: "International Teacher Readiness Checklist",
+    description: "Assess whether you're ready to apply for international teaching opportunities.",
+    image: "/images/ChecklistFreee.png",
+    file: "/downloads/ReadinessChecklist.pdf"
+  },
+  "free-ai-cv": {
+    title: "AI CV Review Prompt",
+    description: "Review your CV like an international school recruiter using AI.",
+    image: "/images/aicv.png",
+    file: "/downloads/AICVReview.pdf"
+  },
+  "community": {
+    title: "Welcome to the Community",
+    description: "Explore our growing collection of free resources designed for teachers.",
+    image: "/images/logo1.png",
+    file: null
+  }
 };
-const params=new URLSearchParams(window.location.search);
-const offer=params.get("offer")||"community";
-const resource=resources[offer]||resources.community;
-document.getElementById("resourceTitle").textContent=resource.title;
-document.getElementById("resourceDescription").textContent=resource.description;
-document.getElementById("resourceImage").src=resource.image;
-document.getElementById("downloadButton").href=resource.file;
 
-// After the download starts, send the visitor back to the homepage
-// (resources section) instead of leaving them stranded on this page.
-// Only do this for actual resources — the generic "community" fallback
-// has no real file to download, so there's nothing to wait on.
-if (resource.file !== "#") {
+const params = new URLSearchParams(window.location.search);
+const offerKey = params.get("offer") || "community";
+const offer = Object.prototype.hasOwnProperty.call(resources, offerKey) ? offerKey : "community";
+const resource = resources[offer];
 
-    const redirectNote = document.getElementById("redirectNote");
+const button = document.getElementById("downloadButton");
+const note = document.getElementById("redirectNote");
 
-    document.getElementById("downloadButton").addEventListener("click", () => {
+document.getElementById("resourceTitle").textContent = resource.title;
+document.getElementById("resourceDescription").textContent = resource.description;
+document.getElementById("resourceImage").src = resource.image;
 
-        redirectNote.textContent = "Taking you back to more resources...";
+if (!resource.file) {
 
-        setTimeout(() => {
-            window.location.href = "/#resources";
-        }, 1200);
+  // Community / unknown offer: nothing to download, so never use the
+  // "download" attribute (with href="#" it saves this HTML page itself).
+  document.getElementById("subtitle").textContent =
+    "Thank you for joining the Empowered Teachers Forum.";
+  button.textContent = "Explore Free Resources";
+  button.href = "/#resources";
 
-    });
+} else {
 
+  button.href = resource.file;
+  button.setAttribute("download", "");
+
+  // Safety net: make sure the file really is a PDF before the visitor clicks.
+  // If the path is wrong the server may return a web page, which would
+  // otherwise be saved with a .pdf name.
+  fetch(resource.file, { method: "HEAD" })
+    .then((res) => {
+      const type = res.headers.get("content-type") || "";
+      if (!res.ok || !type.includes("pdf")) {
+        console.error("Resource is not a PDF:", resource.file, res.status, type);
+        button.removeAttribute("download");
+        button.classList.add("disabled");
+        button.removeAttribute("href");
+        note.textContent = "This resource is temporarily unavailable. Please contact us and we'll send it to you.";
+      }
+    })
+    .catch(() => { /* network hiccup: leave the button working */ });
+
+  // After the download starts, send the visitor back to the resources section.
+  button.addEventListener("click", () => {
+    note.textContent = "Taking you back to more resources...";
+    setTimeout(() => {
+      window.location.href = "/#resources";
+    }, 1200);
+  });
 }
 </script>
 </body>
