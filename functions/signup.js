@@ -1,83 +1,62 @@
-export async function onRequestPost(context){
+const json = (body, status = 200) =>
+  new Response(JSON.stringify(body), {
+    status,
+    headers: { "Content-Type": "application/json" },
+  });
 
-const request=context.request;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-const env=context.env;
+// Map form "source" values to Brevo list IDs
+const LISTS = {
+  checklist: 12,
+  cvprompt: 12, // change when you create a separate list
+};
 
-try{
+export async function onRequestPost({ request, env }) {
+  if (!env.BREVO_API_KEY) {
+    console.error("BREVO_API_KEY is not set");
+    return json({ success: false, message: "Server configuration error." }, 500);
+  }
 
-const {name,email}=await request.json();
+  let data;
+  try {
+    data = await request.json();
+  } catch {
+    return json({ success: false, message: "Invalid request." }, 400);
+  }
 
-const response=await fetch("https://api.brevo.com/v3/contacts",{
+  // Honeypot: real users leave this empty
+  if (data.company) return json({ success: true, message: "Contact Added" });
 
-method:"POST",
+  const name = String(data.name || "").trim().slice(0, 80);
+  const email = String(data.email || "").trim().toLowerCase();
+  const listId = LISTS[data.source] ?? 12;
 
-headers:{
+  if (!EMAIL_RE.test(email)) {
+    return json({ success: false, message: "Please enter a valid email address." }, 400);
+  }
 
-"Content-Type":"application/json",
+  try {
+    const res = await fetch("https://api.brevo.com/v3/contacts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "api-key": env.BREVO_API_KEY,
+      },
+      body: JSON.stringify({
+        email,
+        attributes: { FIRSTNAME: name, SOURCE: data.source || "website" },
+        listIds: [listId],
+        updateEnabled: true,
+      }),
+    });
 
-"api-key":env.BREVO_API_KEY
+    if (res.ok) return json({ success: true, message: "Contact Added" });
 
-},
-
-body:JSON.stringify({
-
-email:email,
-
-attributes:{
-
-FIRSTNAME:name
-
-},
-
-listIds:[12],
-
-updateEnabled:true
-
-})
-
-});
-
-if(response.ok){
-
-return Response.json({
-
-success:true,
-
-message:"Contact Added"
-
-});
-
-}
-
-const error=await response.text();
-
-return new Response(error,{status:400});
-
-}catch(error){
-
-return new Response(
-
-JSON.stringify({
-
-message:error.message
-
-}),
-
-{
-
-status:500,
-
-headers:{
-
-"Content-Type":"application/json"
-
-}
-
-}
-
-);
-
-}
-
+    console.error("Brevo error", res.status, await res.text());
+    return json({ success: false, message: "Could not subscribe you right now. Please try again." }, 502);
+  } catch (err) {
+    console.error("Subscribe failed", err);
+    return json({ success: false, message: "Something went wrong. Please try again." }, 500);
+  }
 }
