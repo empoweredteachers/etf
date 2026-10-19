@@ -115,18 +115,22 @@ Follow Empowered Teachers Forum for more career tips and international teaching 
 <script>
 // "file" is the PDF to download. A resource with no file (the community
 // fallback) gets a normal link instead of a download button.
+// The address of your Cloudflare Worker (the one that handles payments and
+// downloads), with no trailing slash. Example: "https://etf-api.yourname.workers.dev"
+const WORKER_URL = "https://YOUR-WORKER-URL";
+
 const resources = {
   "free-checklist": {
     title: "International Teacher Readiness Checklist",
     description: "Assess whether you're ready to apply for international teaching opportunities.",
     image: "/images/ChecklistFreee.png",
-    file: "/downloads/ReadinessChecklist.pdf"
+    file: WORKER_URL + "/free-download?offer=free-checklist"
   },
   "free-ai-cv": {
     title: "AI CV Review Prompt",
     description: "Review your CV like an international school recruiter using AI.",
     image: "/images/aicv.png",
-    file: "/downloads/AICVReview.pdf"
+    file: WORKER_URL + "/free-download?offer=free-ai-cv"
   },
   "community": {
     title: "Welcome to the Community",
